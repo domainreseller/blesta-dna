@@ -1,0 +1,72 @@
+
+    <?php
+    $this->Form->create();
+    ?>
+    <div class="row panel-fix">
+        <div class="col-md-12">
+            <h4><?php $this->_('Domainnameapi.tab_settings.field_registrar_lock');?></h4>
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <?php
+                        $this->Form->fieldRadio('registrar_lock', 'true', ($vars->registrar_lock ?? null) == 'true');
+                        $this->_('Domainnameapi.tab_settings.field_registrar_lock_yes');
+                        ?>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <?php
+                        $this->Form->fieldRadio('registrar_lock', 'false', ($vars->registrar_lock ?? null) == 'false');
+                        $this->_('Domainnameapi.tab_settings.field_registrar_lock_no');
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h4><?php $this->_('Domainnameapi.tab_settings.field_whois_privacy');?></h4>
+            <div class="form-group">
+                <div class="radio">
+                    <?php
+                    $is_disabled_whois_privacy = $id_protection ?'':'disabled';
+                    ?>
+                    <label>
+                        <?php
+                        $this->Form->fieldRadio('whois_privacy_state', 'true', ($vars->whois_privacy_state ?? null) == 'true' ,[$is_disabled_whois_privacy=>$is_disabled_whois_privacy]);
+                        $this->_('Domainnameapi.tab_settings.field_whois_privacy_state_yes');
+                        ?>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <?php
+                        $this->Form->fieldRadio('whois_privacy_state', 'false', ($vars->whois_privacy_state ?? null) == 'false' ,[ $is_disabled_whois_privacy=>$is_disabled_whois_privacy]);
+                        $this->_('Domainnameapi.tab_settings.field_whois_privacy_state_no');
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h4><?php $this->_('Domainnameapi.tab_settings.field_epp_code');?></h4>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <?php
+                        $this->Form->label($this->_('Domainnameapi.tab_settings.field_epp_code', true), 'request_epp', ['class' => 'inline']);
+                        $this->Form->fieldText('epp_code', ($vars->epp_code ?? null), ['id' => 'epp_code','disabled' => 'disabled']);
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-light float-right" type="submit">
+        <i class="fas fa-edit"></i> <?php $this->_('Domainnameapi.tab_settings.field_submit');?>
+    </button>
+    <?php
+    $this->Form->end();
+    ?>

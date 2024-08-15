@@ -1,0 +1,48 @@
+
+    <?php
+    $this->Form->create();
+    ?>
+
+    <?php
+    $i = 0;
+    foreach ($sections as $key) {
+    ?>
+    <div class="title_row<?php echo ($i == 0 ? ' first' : '');?>">
+        <h3><?php $this->_('Domainnameapi.tab_whois.section_' . $key);?></h3>
+    </div>
+    <div class="pad">
+        <ul>
+            <?php
+            foreach ($fields as $field) {
+                if (!str_contains($field->params['for'], $key)) {
+                    continue;
+                }
+            ?>
+            <li>
+                <?php
+                // Draw the primary label/field
+                call_user_func_array([$this->Form, $field->type], $field->params);
+
+                // Draw each form field associated with this label
+                foreach ($field->fields as $input) {
+                    call_user_func_array([$this->Form, $input->type], $input->params);
+                }
+                ?>
+            </li>
+            <?php
+            }
+            ?>
+        </ul>
+    </div>
+    <?php
+        $i++;
+    }
+    ?>
+    <div class="button_row">
+        <?php
+        $this->Form->fieldSubmit('save', $this->_('Domainnameapi.tab_whois.field_submit', true), ['class' => 'btn btn-primary float-right']);
+        ?>
+    </div>
+    <?php
+    $this->Form->end();
+    ?>
