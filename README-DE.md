@@ -20,8 +20,8 @@ Dieses Modul ist eine Integration von 'domainnameapi.com', die für Blesta entwi
 
 ## Installation
 
-Kopieren Sie die heruntergeladenen Dateien nach blesta/components/modules/domainnameapi/.
-Aktivieren Sie es über das Menü Einstellungen > Module.
+* Kopieren Sie die heruntergeladenen Dateien nach blesta/components/modules/domainnameapi/.
+* Aktivieren Sie es über das Menü Einstellungen > Module.
 
 
 

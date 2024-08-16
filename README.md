@@ -20,8 +20,8 @@ Bu modül, Blesta için geliştirilmiş bir 'domainnameapi.com' entegrasyonudur.
 
 ## Kurulum
 
-İndirdiğiniz dosyaları blesta/components/modules/domainnameapi/
-Ayarlar>Modüller menüsünden aktifleştirin.
+* İndirdiğiniz dosyaları blesta/components/modules/domainnameapi/
+* Ayarlar>Modüller menüsünden aktifleştirin.
 
 ## Dönüş ve Hata Kodları ile Açıklamaları
 

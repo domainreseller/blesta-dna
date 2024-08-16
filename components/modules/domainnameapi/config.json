@@ -2,7 +2,7 @@
     "version": "1.1.2",
     "type": "registrar",
     "name": "Domainnameapi",
-    "description": "Domainnameapi.description",
+    "description": "DomainNameApi is a domain registration module that allows you to register and manage domain names.",
     "authors": [
         {
             "name": "Atak Domain",

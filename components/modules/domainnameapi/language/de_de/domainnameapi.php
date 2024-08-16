@@ -1,5 +1,4 @@
 <?php
-<?php
 
 // Grundlagen
 $lang['Domainnameapi.name']              = 'DomainNameApi';
