@@ -21,8 +21,8 @@ Deze module is een integratie van 'domainnameapi.com' ontwikkeld voor Blesta. (B
 
 ## Installatie
 
-Kopieer de gedownloade bestanden naar blesta/components/modules/domainnameapi/.
-Activeer het vanuit het menu Instellingen > Modules.
+* Kopieer de gedownloade bestanden naar blesta/components/modules/domainnameapi/.
+* Activeer het vanuit het menu Instellingen > Modules.
 
 
 
