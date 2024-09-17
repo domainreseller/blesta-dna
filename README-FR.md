@@ -23,6 +23,13 @@ Ce module est une intégration de 'domainnameapi.com' développée pour Blesta. 
 * Copiez les fichiers téléchargés dans blesta/components/modules/domainnameapi/.
 * Activez-le depuis le menu Paramètres > Modules.
 
+
+<img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">
+<img src="https://github.com/user-attachments/assets/d0ebc402-af3d-4768-8adb-1705cf7c0a67">
+<img src="https://github.com/user-attachments/assets/0d6a129f-7cc2-47f6-88a0-aec35e88c5de">
+<img src="https://github.com/user-attachments/assets/b6534408-ef8f-4911-a158-bd644dc113f1">
+<img src="https://github.com/user-attachments/assets/411afcc4-ecd8-4e2d-a74c-bb9422abd783">
+
 ## Codes de Retour et d'Erreur avec Explications
 
 | Code | Explication                                     | Détails                                                                                                                                                                                             |
