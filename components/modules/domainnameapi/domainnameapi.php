@@ -1373,7 +1373,7 @@ class Domainnameapi extends RegistrarModule
                 $vars['nameservers'],
                 true,
                 false,
-                $vars['nameservers']??[],
+                $vars['addional']??[]
             );
 
         }
