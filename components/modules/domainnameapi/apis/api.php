@@ -10,7 +10,7 @@
 /**
  * Class DomainNameAPI_PHPLibrary
  * @package DomainNameApi
- * @version 2.0.14
+ * @version 2.0.20
  */
 
 /*
@@ -25,7 +25,7 @@ class DomainNameAPI_PHPLibrary
     /**
      * Version of the library
      */
-    const VERSION = '2.0.14';
+    const VERSION = '2.0.20';
 
     /**
      * Error reporting enabled
@@ -457,9 +457,9 @@ class DomainNameAPI_PHPLibrary
 
     /**
      * Check Availability , SLD and TLD must be in array
-     * @param array $domains
-     * @param array $extensions
-     * @param int $period
+     * @param array $Domains
+     * @param array $TLDs
+     * @param int $Period
      * @param string $Command
      * @return array
      */
