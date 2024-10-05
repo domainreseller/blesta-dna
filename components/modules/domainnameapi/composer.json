@@ -1,13 +1,13 @@
 {
-    "name": "blesta/domainnameapi",
-    "description": "DomainNameApi",
-    "license": "proprietary",
-    "type": "blesta-module",
-    "require": {
-        "blesta/composer-installer": "~1.0",
-        "ext-dom": "*",
-        "ext-simplexml": "*",
-        "ext-curl": "*",
-        "ext-soap": "*"
-    }
+  "name": "blesta/domainnameapi",
+  "description": "DomainNameApi",
+  "license": "proprietary",
+  "type": "blesta-module",
+  "require": {
+    "blesta/composer-installer": "~1.0",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
+    "ext-curl": "*",
+    "ext-soap": "*"
+  }
 }

@@ -20,49 +20,52 @@
 
 namespace DomainNameApi;
 
+use Exception;
+use SoapClient;
+use SoapFault;
+
 class DomainNameAPI_PHPLibrary
 {
     /**
      * Version of the library
      */
-    const VERSION = '2.0.20';
+    const VERSION = '2.0.22';
 
     /**
      * Error reporting enabled
      */
-    private $errorReportingEnabled = true;
+    private bool $errorReportingEnabled = true;
     /**
      * Error Reporting Will send this sentry endpoint, if errorReportingEnabled is true
      * This request does not include sensitive informations, sensitive informations are filtered.
      * @var string $errorReportingDsn
      */
-    private $errorReportingDsn = 'https://d4e2d61e4af2d4c68fb21ab93bf51ff2@o4507492369039360.ingest.de.sentry.io/4507492373954640';
+    private string $errorReportingDsn = 'https://d4e2d61e4af2d4c68fb21ab93bf51ff2@o4507492369039360.ingest.de.sentry.io/4507492373954640';
 
     /**
      * Api Username
      *
      * @var string $serviceUsername
      */
-    private $serviceUsername = "ownername";
+    private string $serviceUsername = "ownername";
 
     /*
      * Api Password
      * @var string $servicePassword
      */
-    private $servicePassword = "ownerpass";
+    private string $servicePassword = "ownerpass";
 
     /**
      * Api Service Soap URL
      * @var string $serviceUrl
      */
-    private $serviceUrl         = "https://whmcs.domainnameapi.com/DomainApi.svc";
-    public  $lastRequest        = [];
-    public  $lastResponse       = [];
-    public  $lastParsedResponse = [];
-    public  $lastFunction       = '';
-    private $service;
+    private string $serviceUrl         = "https://whmcs.domainnameapi.com/DomainApi.svc";
+    public  array $lastRequest        = [];
+    public  array $lastResponse       = [];
+    public  array $lastParsedResponse = [];
+    public string $lastFunction       = '';
+    private SoapClient $service;
     private $startAt;
-    private $errorTriggered     = [];
 
 
     /**
@@ -70,7 +73,7 @@ class DomainNameAPI_PHPLibrary
      * @param string $userName
      * @param string $password
      * @param bool $testMode
-     * @throws \Exception | \SoapFault
+     * @throws Exception | SoapFault
      */
     public function __construct($userName = "ownername", $password = "ownerpass", $testMode = false)
     {
@@ -80,18 +83,18 @@ class DomainNameAPI_PHPLibrary
 
         try {
             // Create unique connection
-            $this->service = new \SoapClient($this->serviceUrl . "?singlewsdl", [
+            $this->service = new SoapClient($this->serviceUrl . "?singlewsdl", [
                 "encoding"           => "UTF-8",
                 'features'           => SOAP_SINGLE_ELEMENT_ARRAYS,
                 'exceptions'         => true,
                 'connection_timeout' => 20,
             ]);
-        } catch (\SoapFault $e) {
+        } catch (SoapFault $e) {
             $this->sendErrorToSentryAsync($e);
-            throw new \Exception("SOAP Connection Error: " . $e->getMessage());
-        } catch (\Exception $e) {
+            throw new Exception("SOAP Connection Error: " . $e->getMessage());
+        } catch (Exception $e) {
             $this->sendErrorToSentryAsync($e);
-            throw new \Exception("SOAP Error: " . $e->getMessage());
+            throw new Exception("SOAP Error: " . $e->getMessage());
         }
     }
 
@@ -133,11 +136,12 @@ class DomainNameAPI_PHPLibrary
 
     /**
      * This method sets the last request sent to the API
-     * @return array|mixed
+     * @return DomainNameAPI_PHPLibrary
      */
     public function setRequestData($request)
     {
         $this->lastRequest = $request;
+        return $this;
     }
 
     /**
@@ -156,6 +160,7 @@ class DomainNameAPI_PHPLibrary
     public function setResponseData($response)
     {
         $this->lastResponse = $response;
+        return $this;
     }
 
     /**
@@ -174,6 +179,7 @@ class DomainNameAPI_PHPLibrary
     public function setParsedResponseData($response)
     {
         $this->lastParsedResponse = $response;
+        return $this;
     }
 
     /**
@@ -187,11 +193,12 @@ class DomainNameAPI_PHPLibrary
 
     /**
      * This method sets the last function called
-     * @return string
+     * @return DomainNameAPI_PHPLibrary
      */
     public function setLastFunction($function)
     {
         $this->lastFunction = $function;
+        return $this;
     }
 
     public function getServiceUrl()
@@ -210,7 +217,7 @@ class DomainNameAPI_PHPLibrary
      *
      * @return void
      */
-    private function sendErrorToSentryAsync(\Exception $e)
+    private function sendErrorToSentryAsync(Exception $e)
     {
         if (!$this->errorReportingEnabled) {
             return;
@@ -360,7 +367,7 @@ class DomainNameAPI_PHPLibrary
             }
 
             return $external_ip;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return 'unknown';
         }
     }
@@ -392,7 +399,7 @@ class DomainNameAPI_PHPLibrary
 
                 $active_currency = $data['ResellerInfo']['BalanceInfoList']['BalanceInfo'][0];
                 $balances        = [];
-                foreach ($data['ResellerInfo']['BalanceInfoList']['BalanceInfo'] as $k => $v) {
+                foreach ($data['ResellerInfo']['BalanceInfoList']['BalanceInfo'] as  $v) {
                     if ($v['CurrencyName'] == $data['ResellerInfo']['CurrencyInfo']['Code']) {
                         $active_currency = $v;
                     }
@@ -559,7 +566,7 @@ class DomainNameAPI_PHPLibrary
                 $result["error"]  = $this->setError("INVALID_DOMAIN_LIST", "Invalid response received from server!",
                     "Domain info is not a valid array or more than one domain info has returned!");
 
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
             return $result;
         });
@@ -628,7 +635,7 @@ class DomainNameAPI_PHPLibrary
                     'error'  => $this->setError("INVALID_TLD_LIST", "Invalid response received from server!",
                         "Domain info is not a valid array or more than one domain info has returned!")
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_TLD_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_TLD_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
 
             return $result;
@@ -669,7 +676,7 @@ class DomainNameAPI_PHPLibrary
                 $result["error"]  = $this->setError("INVALID_DOMAIN_LIST", "Invalid response received from server!",
                     "Domain info is not a valid array or more than one domain info has returned!");
 
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_LIST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
             return $result;
         });
@@ -914,7 +921,7 @@ class DomainNameAPI_PHPLibrary
                         "Contact info is not a valid array or more than one contact info has returned!"),
                     'result' => 'ERROR'
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_CONTACT_INTO: Invalid response received from server! Contact info is not a valid array or more than one contact info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_CONTACT_INTO: Invalid response received from server! Contact info is not a valid array or more than one contact info has returned!"));
             }
             return $result;
         });
@@ -962,7 +969,7 @@ class DomainNameAPI_PHPLibrary
                         "Contact info is not a valid array or more than one contact info has returned!")
                 ];
 
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_CONTACT_SAVE: Invalid response received from server! Contact info is not a valid array or more than one contact info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_CONTACT_SAVE: Invalid response received from server! Contact info is not a valid array or more than one contact info has returned!"));
             }
             return $result;
         });
@@ -1019,7 +1026,7 @@ class DomainNameAPI_PHPLibrary
                         "Invalid response received from server!",
                         "Domain info is not a valid array or more than one domain info has returned!")
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_TRANSFER_REQUEST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_TRANSFER_REQUEST: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
             return $result;
         });
@@ -1154,7 +1161,7 @@ class DomainNameAPI_PHPLibrary
                     'error'  => $this->setError("INVALID_DOMAIN_RENEW", "Invalid response received from server!",
                         "Domain info is not a valid array or more than one domain info has returned!")
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_RENEW: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_RENEW: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
         });
 
@@ -1228,7 +1235,7 @@ class DomainNameAPI_PHPLibrary
                     'error'  => $this->setError("INVALID_DOMAIN_REGISTER", "Invalid response received from server!",
                         "Domain info is not a valid array or more than one domain info has returned!")
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_REGISTER: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_REGISTER: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
             return $result;
         });
@@ -1261,7 +1268,7 @@ class DomainNameAPI_PHPLibrary
             ]
         ];
 
-        $response = self::parseCall(__FUNCTION__, $parameters, function ($response) use ($parameters) {
+        return  self::parseCall(__FUNCTION__, $parameters, function ($response) use ($parameters) {
             return [
                 'data'   => [
                     'PrivacyProtectionStatus' => $parameters["request"]["ProtectPrivacy"]
@@ -1271,7 +1278,6 @@ class DomainNameAPI_PHPLibrary
         });
 
 
-        return $response;
     }
 
 
@@ -1290,8 +1296,7 @@ class DomainNameAPI_PHPLibrary
             ]
         ];
 
-        $response = self::parseCall(__FUNCTION__, $parameters, function ($response) use ($parameters) {
-            $result = [];
+        return self::parseCall(__FUNCTION__, $parameters, function ($response) use ($parameters) {
             $data   = $response[key($response)];
 
             // If DomainInfo a valid array
@@ -1308,13 +1313,12 @@ class DomainNameAPI_PHPLibrary
                         "Domain info is not a valid array or more than one domain info has returned!"),
                     'result' => 'ERROR'
                 ];
-                $this->sendErrorToSentryAsync(new \Exception("INVALID_DOMAIN_SYNC: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
+                $this->sendErrorToSentryAsync(new Exception("INVALID_DOMAIN_SYNC: Invalid response received from server! Domain info is not a valid array or more than one domain info has returned!"));
             }
 
             return $result;
         });
 
-        return $response;
     }
 
 
@@ -1323,7 +1327,7 @@ class DomainNameAPI_PHPLibrary
     {
         try {
             $_obj = json_decode(json_encode($_obj), true);
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
         }
         return $_obj;
     }
@@ -1406,7 +1410,7 @@ class DomainNameAPI_PHPLibrary
         }
 
         if (isset($result["Code"]) && $trace === true) {
-            $this->sendErrorToSentryAsync(new \Exception("API_ERROR: " . $result["Code"] . " - " . $result["Message"] . " - " . $result["Details"]));
+            $this->sendErrorToSentryAsync(new Exception("API_ERROR: " . $result["Code"] . " - " . $result["Message"] . " - " . $result["Details"]));
         }
 
         return $result;
@@ -1415,7 +1419,7 @@ class DomainNameAPI_PHPLibrary
     // Check if response contains error
     private function hasError($response)
     {
-        return ($this->parseError($response, false) === false) ? false : true;
+        return !(($this->parseError($response, false) === false));
     }
 
     // Set error message
@@ -1431,395 +1435,146 @@ class DomainNameAPI_PHPLibrary
     // Parse domain info
     private function parseDomainInfo($data)
     {
-        $result                                     = [];
-        $result["ID"]                               = "";
-        $result["Status"]                           = "";
-        $result["DomainName"]                       = "";
-        $result["AuthCode"]                         = "";
-        $result["LockStatus"]                       = "";
-        $result["PrivacyProtectionStatus"]          = "";
-        $result["IsChildNameServer"]                = "";
-        $result["Contacts"]                         = [];
-        $result["Contacts"]["Billing"]              = [];
-        $result["Contacts"]["Technical"]            = [];
-        $result["Contacts"]["Administrative"]       = [];
-        $result["Contacts"]["Registrant"]           = [];
-        $result["Contacts"]["Billing"]["ID"]        = "";
-        $result["Contacts"]["Technical"]["ID"]      = "";
-        $result["Contacts"]["Administrative"]["ID"] = "";
-        $result["Contacts"]["Registrant"]["ID"]     = "";
-        $result["Dates"]                            = [];
-        $result["Dates"]["Start"]                   = "";
-        $result["Dates"]["Expiration"]              = "";
-        $result["Dates"]["RemainingDays"]           = "";
-        $result["NameServers"]                      = [];
-        $result["Additional"]                       = [];
-        $result["ChildNameServers"]                 = [];
+    $result = [
+        "ID" => isset($data["Id"]) && is_numeric($data["Id"]) ? $data["Id"] : "",
+        "Status" => $data["Status"] ?? "",
+        "DomainName" => $data["DomainName"] ?? "",
+        "AuthCode" => $data["Auth"] ?? "",
+        "LockStatus" => isset($data["LockStatus"]) ? var_export($data["LockStatus"], true) : "",
+        "PrivacyProtectionStatus" => isset($data["PrivacyProtectionStatus"]) ? var_export($data["PrivacyProtectionStatus"], true) : "",
+        "IsChildNameServer" => isset($data["IsChildNameServer"]) ? var_export($data["IsChildNameServer"], true) : "",
+        "Contacts" => [
+            "Billing" => [
+                "ID" => isset($data["BillingContactId"]) && is_numeric($data["BillingContactId"]) ? $data["BillingContactId"] : "",
+            ],
+            "Technical" => [
+                "ID" => isset($data["TechnicalContactId"]) && is_numeric($data["TechnicalContactId"]) ? $data["TechnicalContactId"] : "",
+            ],
+            "Administrative" => [
+                "ID" => isset($data["AdministrativeContactId"]) && is_numeric($data["AdministrativeContactId"]) ? $data["AdministrativeContactId"] : "",
+            ],
+            "Registrant" => [
+                "ID" => isset($data["RegistrantContactId"]) && is_numeric($data["RegistrantContactId"]) ? $data["RegistrantContactId"] : "",
+            ],
+        ],
+        "Dates" => [
+            "Start" => $data["StartDate"] ?? "",
+            "Expiration" => $data["ExpirationDate"] ?? "",
+            "RemainingDays" => isset($data["RemainingDay"]) && is_numeric($data["RemainingDay"]) ? $data["RemainingDay"] : "",
+        ],
+        "NameServers" => $data["NameServerList"] ?? [],
+        "Additional" => [],
+        "ChildNameServers" => [],
+    ];
 
-        foreach ($data as $attrName => $attrValue) {
-            switch ($attrName) {
-                case "Id":
-                    if (is_numeric($attrValue)) {
-                        $result["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Status":
-
-                    $result["Status"] = $attrValue;
-                    break;
-
-
-                case "DomainName":
-
-                    $result["DomainName"] = $attrValue;
-                    break;
-
-
-                case "AdministrativeContactId":
-
-                    if (is_numeric($attrValue)) {
-                        $result["Contacts"]["Administrative"]["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "BillingContactId":
-
-                    if (is_numeric($attrValue)) {
-                        $result["Contacts"]["Billing"]["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "TechnicalContactId":
-
-                    if (is_numeric($attrValue)) {
-                        $result["Contacts"]["Technical"]["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "RegistrantContactId":
-
-                    if (is_numeric($attrValue)) {
-                        $result["Contacts"]["Registrant"]["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Auth":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["AuthCode"] = $attrValue;
-                    }
-                    break;
-
-
-                case "StartDate":
-
-                    $result["Dates"]["Start"] = $attrValue;
-                    break;
-
-
-                case "ExpirationDate":
-
-                    $result["Dates"]["Expiration"] = $attrValue;
-                    break;
-
-
-                case "LockStatus":
-
-                    if (is_bool($attrValue)) {
-                        $result["LockStatus"] = var_export($attrValue, true);
-                    }
-                    break;
-
-
-                case "PrivacyProtectionStatus":
-
-                    if (is_bool($attrValue)) {
-                        $result["PrivacyProtectionStatus"] = var_export($attrValue, true);
-                    }
-                    break;
-
-
-                case "IsChildNameServer":
-
-                    if (is_bool($attrValue)) {
-                        $result["IsChildNameServer"] = var_export($attrValue, true);
-                    }
-                    break;
-
-
-                case "RemainingDay":
-
-                    if (is_numeric($attrValue)) {
-                        $result["Dates"]["RemainingDays"] = $attrValue;
-                    }
-                    break;
-
-
-                case "NameServerList":
-
-                    if (is_array($attrValue)) {
-                        foreach ($attrValue as $nameserverValue) {
-                            $result["NameServers"] = $nameserverValue;
-                        }
-                    }
-                    break;
-
-
-                case "AdditionalAttributes":
-
-                    if (is_array($attrValue)) {
-                        if (isset($attrValue["KeyValueOfstringstring"])) {
-                            foreach ($attrValue["KeyValueOfstringstring"] as $attribute) {
+    // AdditionalAttributes kontrolü
+    if (isset($data["AdditionalAttributes"]["KeyValueOfstringstring"]) && is_array($data["AdditionalAttributes"]["KeyValueOfstringstring"])) {
+        foreach ($data["AdditionalAttributes"]["KeyValueOfstringstring"] as $attribute) {
                                 if (isset($attribute["Key"]) && isset($attribute["Value"])) {
                                     $result["Additional"][$attribute["Key"]] = $attribute["Value"];
                                 }
                             }
                         }
-                    }
-                    break;
 
-
-                case "ChildNameServerInfo":
-                    if (is_array($attrValue)) {
-                        if (isset($attrValue["ChildNameServerInfo"]) && is_array($attrValue["ChildNameServerInfo"]) && count($attrValue["ChildNameServerInfo"]) > 0) {
-                            foreach ($attrValue["ChildNameServerInfo"] as $attribute) {
+    // ChildNameServerInfo kontrolü
+    if (isset($data["ChildNameServerInfo"]) && is_array($data["ChildNameServerInfo"])) {
+        foreach ($data["ChildNameServerInfo"] as $attribute) {
                                 if (isset($attribute["ChildNameServer"]) && isset($attribute["IpAddress"])) {
-                                    $ns          = "";
+                $ns = is_string($attribute["ChildNameServer"]) ? $attribute["ChildNameServer"] : "";
                                     $IpAddresses = [];
 
-                                    // Name of NameServer
-                                    if (is_string($attribute["ChildNameServer"])) {
-                                        $ns = $attribute["ChildNameServer"];
-                                    }
-
-                                    // IP adresses of NameServer
-                                    if (is_array($attribute["IpAddress"]) && isset($attribute["IpAddress"]["string"])) {
+                if (is_array($attribute["IpAddress"])) {
+                    if (isset($attribute["IpAddress"]["string"])) {
                                         if (is_array($attribute["IpAddress"]["string"])) {
-                                            foreach ($attribute["IpAddress"]["string"] as $ip) {
-                                                if (isset($ip) && is_string($ip)) {
-                                                    $IpAddresses = $ip;
-                                                }
-                                            }
+                            $IpAddresses = array_filter($attribute["IpAddress"]["string"], 'is_string');
                                         } elseif (is_string($attribute["IpAddress"]["string"])) {
-                                            $IpAddresses = $attribute["IpAddress"]["string"];
+                            $IpAddresses = [$attribute["IpAddress"]["string"]];
+                        }
                                         }
                                     }
 
                                     $result["ChildNameServers"][] = [
                                         "ns" => $ns,
-                                        "ip" => $IpAddresses
+                    "ip" => $IpAddresses,
                                     ];
                                 }
                             }
                         }
-                    }
-                    break;
-            }
-        }
 
         return $result;
     }
 
-    // Parse Contact info
+    /* Parses contact information from the provided data array.
+ *
+ * @param array $data The data array containing contact information.
+ *
+ * @return array An associative array with the parsed contact information, including:
+ *   - string ID
+ *   - string Status
+ *   - string AuthCode
+ *   - string FirstName
+ *   - string LastName
+ *   - string Company
+ *   - string EMail
+ *   - string Type
+ *   - array Address
+ *     - string Line1
+ *     - string Line2
+ *     - string Line3
+ *     - string State
+ *     - string City
+ *     - string Country
+ *     - string ZipCode
+ *   - array Phone
+ *     - array Phone
+ *       - string Number
+ *       - string CountryCode
+ *     - array Fax
+ *       - string Number
+ *       - string CountryCode
+ *   - array Additional
+ */
     private function parseContactInfo($data)
     {
-        $result                                  = [];
-        $result["ID"]                            = "";
-        $result["Status"]                        = "";
-        $result["Additional"]                    = [];
-        $result["Address"]                       = [];
-        $result["Address"]["Line1"]              = "";
-        $result["Address"]["Line2"]              = "";
-        $result["Address"]["Line3"]              = "";
-        $result["Address"]["State"]              = "";
-        $result["Address"]["City"]               = "";
-        $result["Address"]["Country"]            = "";
-        $result["Address"]["ZipCode"]            = "";
-        $result["Phone"]                         = [];
-        $result["Phone"]["Phone"]                = [];
-        $result["Phone"]["Phone"]["Number"]      = "";
-        $result["Phone"]["Phone"]["CountryCode"] = "";
-        $result["Phone"]["Fax"]["Number"]        = "";
-        $result["Phone"]["Fax"]["CountryCode"]   = "";
-        $result["AuthCode"]                      = "";
-        $result["FirstName"]                     = "";
-        $result["LastName"]                      = "";
-        $result["Company"]                       = "";
-        $result["EMail"]                         = "";
-        $result["Type"]                          = "";
+    $result = [
+        "ID" => isset($data["Id"]) && is_numeric($data["Id"]) ? $data["Id"] : "",
+        "Status" => $data["Status"] ?? "",
+        "AuthCode" => $data["Auth"] ?? "",
+        "FirstName" => $data["FirstName"] ?? "",
+        "LastName" => $data["LastName"] ?? "",
+        "Company" => $data["Company"] ?? "",
+        "EMail" => $data["EMail"] ?? "",
+        "Type" => $data["Type"] ?? "",
+        "Address" => [
+            "Line1" => $data["AddressLine1"] ?? "",
+            "Line2" => $data["AddressLine2"] ?? "",
+            "Line3" => $data["AddressLine3"] ?? "",
+            "State" => $data["State"] ?? "",
+            "City" => $data["City"] ?? "",
+            "Country" => $data["Country"] ?? "",
+            "ZipCode" => $data["ZipCode"] ?? "",
+        ],
+        "Phone" => [
+            "Phone" => [
+                "Number" => $data["Phone"] ?? "",
+                "CountryCode" => $data["PhoneCountryCode"] ?? "",
+            ],
+            "Fax" => [
+                "Number" => $data["Fax"] ?? "",
+                "CountryCode" => $data["FaxCountryCode"] ?? "",
+            ],
+        ],
+        "Additional" => [],
+    ];
 
-        foreach ($data as $attrName => $attrValue) {
-            switch ($attrName) {
-                case "Id":
-
-                    if (is_numeric($attrValue)) {
-                        $result["ID"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Status":
-
-                    $result["Status"] = $attrValue;
-                    break;
-
-
-                case "AdditionalAttributes":
-
-                    if (is_array($attrValue)) {
-                        if (isset($attrValue["KeyValueOfstringstring"])) {
-                            foreach ($attrValue["KeyValueOfstringstring"] as $attribute) {
+    // AdditionalAttributes kontrolü
+    if (isset($data["AdditionalAttributes"]["KeyValueOfstringstring"]) && is_array($data["AdditionalAttributes"]["KeyValueOfstringstring"])) {
+        foreach ($data["AdditionalAttributes"]["KeyValueOfstringstring"] as $attribute) {
                                 if (isset($attribute["Key"]) && isset($attribute["Value"])) {
                                     $result["Additional"][$attribute["Key"]] = $attribute["Value"];
                                 }
                             }
                         }
-                    }
-                    break;
-
-
-                case "AddressLine1":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["Line1"] = $attrValue;
-                    }
-                    break;
-
-
-                case "AddressLine2":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["Line2"] = $attrValue;
-                    }
-                    break;
-
-
-                case "AddressLine3":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["Line3"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Auth":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["AuthCode"] = $attrValue;
-                    }
-                    break;
-
-
-                case "City":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["City"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Company":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Company"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Country":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["Country"] = $attrValue;
-                    }
-                    break;
-
-
-                case "EMail":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["EMail"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Fax":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Phone"]["Fax"]["Number"] = $attrValue;
-                    }
-                    break;
-
-
-                case "FaxCountryCode":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Phone"]["Fax"]["CountryCode"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Phone":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Phone"]["Phone"]["Number"] = $attrValue;
-                    }
-                    break;
-
-
-                case "PhoneCountryCode":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Phone"]["Phone"]["CountryCode"] = $attrValue;
-                    }
-                    break;
-
-
-                case "FirstName":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["FirstName"] = $attrValue;
-                    }
-                    break;
-
-
-                case "LastName":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["LastName"] = $attrValue;
-                    }
-                    break;
-
-
-                case "State":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["State"] = $attrValue;
-                    }
-                    break;
-
-
-                case "ZipCode":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Address"]["ZipCode"] = $attrValue;
-                    }
-                    break;
-
-
-                case "Type":
-
-                    if (is_string($attrValue) && !is_null($attrValue)) {
-                        $result["Type"] = $attrValue;
-                    }
-                    break;
-            }
-        }
 
         return $result;
     }
@@ -1834,9 +1589,9 @@ class DomainNameAPI_PHPLibrary
 
         try {
             // SOAP method which is same as current function name called
-            $_response_raw = $_response = $this->service->__soapCall($fn, [$parameters]);
+            $_response = $this->service->__soapCall($fn, [$parameters]);
 
-            $_response_raw = $this->service->__getLastResponse();
+            $this->service->__getLastResponse();
 
 
             // Serialize as array
@@ -1855,11 +1610,12 @@ class DomainNameAPI_PHPLibrary
                 $result["result"] = "ERROR";
                 $result["error"]  = $this->parseError($_response);
             }
-        } catch (\SoapFault $ex) {
+
+        } catch (SoapFault $ex) {
             $result["result"] = "ERROR";
             $result["error"]  = $this->setError('INVALID_RESPONSE', 'Invalid Response occured', $ex->getMessage());
             $this->sendErrorToSentryAsync($ex);
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             $result["result"] = "ERROR";
             $result["error"]  = $this->parseError($this->objectToArray($ex));
             $this->sendErrorToSentryAsync($ex);
@@ -1879,8 +1635,9 @@ class DomainNameAPI_PHPLibrary
      */
     public function isTrTLD($domain)
     {
-        preg_match('/\.com\.tr|\.net\.tr|\.org\.tr|\.biz\.tr|\.info\.tr|\.tv\.tr|\.gen\.tr|\.web\.tr|\.tel\.tr|\.name\.tr|\.bbs\.tr|\.gov\.tr|\.bel\.tr|\.pol\.tr|\.edu\.tr|\.k12\.tr|\.av\.tr|\.dr\.tr$/',
-            $domain, $result);
+        //preg_match('/\.com\.tr|\.net\.tr|\.org\.tr|\.biz\.tr|\.info\.tr|\.tv\.tr|\.gen\.tr|\.web\.tr|\.tel\.tr|\.name\.tr|\.bbs\.tr|\.gov\.tr|\.bel\.tr|\.pol\.tr|\.edu\.tr|\.k12\.tr|\.av\.tr|\.dr\.tr$/',  $domain, $result);
+
+        preg_match('/\.tr$/', $domain, $result);
 
         return isset($result[0]);
     }

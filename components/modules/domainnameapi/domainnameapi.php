@@ -568,7 +568,7 @@ class Domainnameapi extends RegistrarModule
         // Set default name servers
 
         if (!isset($vars->ns1) && isset($package->meta->ns)) {
-            $i = 0;
+            $i = 1;
             foreach ($package->meta->ns as $ns) {
                 $vars->{'ns' . ($i++)} = $ns;
             }
@@ -618,7 +618,10 @@ class Domainnameapi extends RegistrarModule
         if (!isset($vars->ns) && isset($package->meta->ns)) {
             $i = 0;
             foreach ($package->meta->ns as $ns) {
-                $vars->{'ns' . $i++ } = $ns;
+                if(strlen($ns) > 0) {
+                    $i++;
+                    $vars->{'ns' . ($i)} = $ns;
+                }
             }
         }
 
@@ -998,7 +1001,6 @@ class Domainnameapi extends RegistrarModule
 
 
         if (!empty($post)) {
-            die(var_dump($post));
             // Update domain nameservers
             $this->setDomainNameservers($fields->domain, $package->module_row, ($post['ns'] ?? []));
             $vars = (object)$post;
@@ -1026,9 +1028,9 @@ class Domainnameapi extends RegistrarModule
      * @param string $view The view to use
      * @param stdClass $package A stdClass object representing the current package
      * @param stdClass $service A stdClass object representing the current service
-     * @param array $get Any GET parameters
-     * @param array $post Any POST parameters
-     * @param array $files Any FILES parameters
+     * @param array|null $get Any GET parameters
+     * @param array|null $post Any POST parameters
+     * @param array|null $files Any FILES parameters
      * @return string The string representing the contents of this tab
      */
     private function manageSettings($view, $package, $service, array $get = null, array $post = null, array $files = null) {
@@ -1045,6 +1047,7 @@ class Domainnameapi extends RegistrarModule
         // Determine if this service has access to id_protection
         $id_protection = $this->featureServiceEnabled('id_protection', $service);
 
+
         // Determine if this service has access to epp_code
         $epp_code = $package->meta->epp_code ?? '0';
 
@@ -1054,20 +1057,35 @@ class Domainnameapi extends RegistrarModule
 
         if (!empty($post)) {
             // Set domain status
-            if ($post['registrar_lock'] == 'true') {
-                $this->lockDomain($fields->domain, $package->module_row);
-            } else {
-                $this->unlockDomain($fields->domain, $package->module_row);
+            if ($post['registrar_lock'] == 'true' && $post['current_id_protection'] == 'false') {
+                $lockStatus = $this->lockDomain($fields->domain, $package->module_row);
+                if ($lockStatus === true) {
+                    $vars->registrar_lock = 'true';
+                }
+
+                $this->view->set('lockStatus', $lockStatus);
             }
 
-            if($id_protection){
-                if($post['whois_privacy_state'] == 'true'){
-                    $this->enablePrivacyProtection($fields->domain, $package->module_row);
-                }else{
-                    $this->disablePrivacyProtection($fields->domain, $package->module_row);
+            if ($post['registrar_lock'] == 'false' && $post['current_id_protection'] == 'true') {
+                $unlockStatus = $this->unlockDomain($fields->domain, $package->module_row);
+                if ($unlockStatus === true) {
+                    $vars->registrar_lock = 'false';
                 }
             }
 
+            if ($post['whois_privacy_state'] == 'true' && $post['current_privacy_state'] == 'false' && $id_protection === true) {
+                $privacyStatus = $this->enablePrivacyProtection($fields->domain, $package->module_row);
+                if ($privacyStatus === true) {
+                    $vars->whois_privacy_state = 'true';
+                }
+            }
+            if ($post['whois_privacy_state'] == 'false' && $post['current_privacy_state'] == 'true' && $id_protection === true) {
+                $privacyStatus = $this->disablePrivacyProtection($fields->domain, $package->module_row);
+
+                if ($privacyStatus === true) {
+                    $vars->whois_privacy_state = 'false';
+                }
+            }
         }
 
 
@@ -1300,7 +1318,7 @@ class Domainnameapi extends RegistrarModule
         $response = $api->EnableTheftProtectionLock($domain);
         $this->processResponse($api);
 
-        return $response['status'] == 'OK';
+        return $response['result'] == 'OK';
     }
 
     /**
@@ -1319,7 +1337,7 @@ class Domainnameapi extends RegistrarModule
         $response = $api->DisableTheftProtectionLock($domain);
         $this->processResponse($api);
 
-        return $response['status'] == 'OK';
+        return $response['result'] == 'OK';
     }
 
     public function enablePrivacyProtection($domain, $module_row_id = null)
@@ -1330,7 +1348,7 @@ class Domainnameapi extends RegistrarModule
         $response = $api->ModifyPrivacyProtectionStatus($domain,true);
         $this->processResponse($api);
 
-        return $response['status'] == 'OK';
+        return $response['result'] == 'OK';
     }
     public function disablePrivacyProtection($domain, $module_row_id = null)
     {
@@ -1340,7 +1358,7 @@ class Domainnameapi extends RegistrarModule
         $response = $api->ModifyPrivacyProtectionStatus($domain,false);
         $this->processResponse($api);
 
-        return $response['status'] == 'OK';
+        return $response['result'] == 'OK';
     }
 
 
@@ -1382,7 +1400,7 @@ class Domainnameapi extends RegistrarModule
 
         $this->processResponse($api);
 
-        return $registerResult['status'] == 'OK';
+        return $registerResult['result'] == 'OK';
     }
 
     /**
