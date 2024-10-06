@@ -1435,71 +1435,197 @@ class DomainNameAPI_PHPLibrary
     // Parse domain info
     private function parseDomainInfo($data)
     {
-    $result = [
-        "ID" => isset($data["Id"]) && is_numeric($data["Id"]) ? $data["Id"] : "",
-        "Status" => $data["Status"] ?? "",
-        "DomainName" => $data["DomainName"] ?? "",
-        "AuthCode" => $data["Auth"] ?? "",
-        "LockStatus" => isset($data["LockStatus"]) ? var_export($data["LockStatus"], true) : "",
-        "PrivacyProtectionStatus" => isset($data["PrivacyProtectionStatus"]) ? var_export($data["PrivacyProtectionStatus"], true) : "",
-        "IsChildNameServer" => isset($data["IsChildNameServer"]) ? var_export($data["IsChildNameServer"], true) : "",
-        "Contacts" => [
-            "Billing" => [
-                "ID" => isset($data["BillingContactId"]) && is_numeric($data["BillingContactId"]) ? $data["BillingContactId"] : "",
-            ],
-            "Technical" => [
-                "ID" => isset($data["TechnicalContactId"]) && is_numeric($data["TechnicalContactId"]) ? $data["TechnicalContactId"] : "",
-            ],
-            "Administrative" => [
-                "ID" => isset($data["AdministrativeContactId"]) && is_numeric($data["AdministrativeContactId"]) ? $data["AdministrativeContactId"] : "",
-            ],
-            "Registrant" => [
-                "ID" => isset($data["RegistrantContactId"]) && is_numeric($data["RegistrantContactId"]) ? $data["RegistrantContactId"] : "",
-            ],
-        ],
-        "Dates" => [
-            "Start" => $data["StartDate"] ?? "",
-            "Expiration" => $data["ExpirationDate"] ?? "",
-            "RemainingDays" => isset($data["RemainingDay"]) && is_numeric($data["RemainingDay"]) ? $data["RemainingDay"] : "",
-        ],
-        "NameServers" => $data["NameServerList"] ?? [],
-        "Additional" => [],
-        "ChildNameServers" => [],
-    ];
+        $result                                     = [];
+        $result["ID"]                               = "";
+        $result["Status"]                           = "";
+        $result["DomainName"]                       = "";
+        $result["AuthCode"]                         = "";
+        $result["LockStatus"]                       = "";
+        $result["PrivacyProtectionStatus"]          = "";
+        $result["IsChildNameServer"]                = "";
+        $result["Contacts"]                         = [];
+        $result["Contacts"]["Billing"]              = [];
+        $result["Contacts"]["Technical"]            = [];
+        $result["Contacts"]["Administrative"]       = [];
+        $result["Contacts"]["Registrant"]           = [];
+        $result["Contacts"]["Billing"]["ID"]        = "";
+        $result["Contacts"]["Technical"]["ID"]      = "";
+        $result["Contacts"]["Administrative"]["ID"] = "";
+        $result["Contacts"]["Registrant"]["ID"]     = "";
+        $result["Dates"]                            = [];
+        $result["Dates"]["Start"]                   = "";
+        $result["Dates"]["Expiration"]              = "";
+        $result["Dates"]["RemainingDays"]           = "";
+        $result["NameServers"]                      = [];
+        $result["Additional"]                       = [];
+        $result["ChildNameServers"]                 = [];
 
-    // AdditionalAttributes kontrolü
-    if (isset($data["AdditionalAttributes"]["KeyValueOfstringstring"]) && is_array($data["AdditionalAttributes"]["KeyValueOfstringstring"])) {
-        foreach ($data["AdditionalAttributes"]["KeyValueOfstringstring"] as $attribute) {
+        foreach ($data as $attrName => $attrValue) {
+            switch ($attrName) {
+                case "Id":
+                    if (is_numeric($attrValue)) {
+                        $result["ID"] = $attrValue;
+                    }
+                    break;
+
+
+                case "Status":
+
+                    $result["Status"] = $attrValue;
+                    break;
+
+
+                case "DomainName":
+
+                    $result["DomainName"] = $attrValue;
+                    break;
+
+
+                case "AdministrativeContactId":
+
+                    if (is_numeric($attrValue)) {
+                        $result["Contacts"]["Administrative"]["ID"] = $attrValue;
+                    }
+                    break;
+
+
+                case "BillingContactId":
+
+                    if (is_numeric($attrValue)) {
+                        $result["Contacts"]["Billing"]["ID"] = $attrValue;
+                    }
+                    break;
+
+
+                case "TechnicalContactId":
+
+                    if (is_numeric($attrValue)) {
+                        $result["Contacts"]["Technical"]["ID"] = $attrValue;
+                    }
+                    break;
+
+
+                case "RegistrantContactId":
+
+                    if (is_numeric($attrValue)) {
+                        $result["Contacts"]["Registrant"]["ID"] = $attrValue;
+                    }
+                    break;
+
+
+                case "Auth":
+
+                    if (is_string($attrValue) && !is_null($attrValue)) {
+                        $result["AuthCode"] = $attrValue;
+                    }
+                    break;
+
+
+                case "StartDate":
+
+                    $result["Dates"]["Start"] = $attrValue;
+                    break;
+
+
+                case "ExpirationDate":
+
+                    $result["Dates"]["Expiration"] = $attrValue;
+                    break;
+
+
+                case "LockStatus":
+
+                    if (is_bool($attrValue)) {
+                        $result["LockStatus"] = var_export($attrValue, true);
+                    }
+                    break;
+
+
+                case "PrivacyProtectionStatus":
+
+                    if (is_bool($attrValue)) {
+                        $result["PrivacyProtectionStatus"] = var_export($attrValue, true);
+                    }
+                    break;
+
+
+                case "IsChildNameServer":
+
+                    if (is_bool($attrValue)) {
+                        $result["IsChildNameServer"] = var_export($attrValue, true);
+                    }
+                    break;
+
+
+                case "RemainingDay":
+
+                    if (is_numeric($attrValue)) {
+                        $result["Dates"]["RemainingDays"] = $attrValue;
+                    }
+                    break;
+
+
+                case "NameServerList":
+
+                    if (is_array($attrValue)) {
+                        foreach ($attrValue as $nameserverValue) {
+                            $result["NameServers"] = $nameserverValue;
+                        }
+                    }
+                    break;
+
+
+                case "AdditionalAttributes":
+
+                    if (is_array($attrValue)) {
+                        if (isset($attrValue["KeyValueOfstringstring"])) {
+                            foreach ($attrValue["KeyValueOfstringstring"] as $attribute) {
                                 if (isset($attribute["Key"]) && isset($attribute["Value"])) {
                                     $result["Additional"][$attribute["Key"]] = $attribute["Value"];
                                 }
                             }
                         }
+                    }
+                    break;
 
-    // ChildNameServerInfo kontrolü
-    if (isset($data["ChildNameServerInfo"]) && is_array($data["ChildNameServerInfo"])) {
-        foreach ($data["ChildNameServerInfo"] as $attribute) {
+
+                case "ChildNameServerInfo":
+                    if (is_array($attrValue)) {
+                        if (isset($attrValue["ChildNameServerInfo"]) && is_array($attrValue["ChildNameServerInfo"]) && count($attrValue["ChildNameServerInfo"]) > 0) {
+                            foreach ($attrValue["ChildNameServerInfo"] as $attribute) {
                                 if (isset($attribute["ChildNameServer"]) && isset($attribute["IpAddress"])) {
-                $ns = is_string($attribute["ChildNameServer"]) ? $attribute["ChildNameServer"] : "";
+                                    $ns          = "";
                                     $IpAddresses = [];
 
-                if (is_array($attribute["IpAddress"])) {
-                    if (isset($attribute["IpAddress"]["string"])) {
+                                    // Name of NameServer
+                                    if (is_string($attribute["ChildNameServer"])) {
+                                        $ns = $attribute["ChildNameServer"];
+                                    }
+
+                                    // IP adresses of NameServer
+                                    if (is_array($attribute["IpAddress"]) && isset($attribute["IpAddress"]["string"])) {
                                         if (is_array($attribute["IpAddress"]["string"])) {
-                            $IpAddresses = array_filter($attribute["IpAddress"]["string"], 'is_string');
+                                            foreach ($attribute["IpAddress"]["string"] as $ip) {
+                                                if (isset($ip) && is_string($ip)) {
+                                                    $IpAddresses = $ip;
+                                                }
+                                            }
                                         } elseif (is_string($attribute["IpAddress"]["string"])) {
-                            $IpAddresses = [$attribute["IpAddress"]["string"]];
-                        }
+                                            $IpAddresses = $attribute["IpAddress"]["string"];
                                         }
                                     }
 
                                     $result["ChildNameServers"][] = [
                                         "ns" => $ns,
-                    "ip" => $IpAddresses,
+                                        "ip" => $IpAddresses
                                     ];
                                 }
                             }
                         }
+                    }
+                    break;
+            }
+        }
 
         return $result;
     }
