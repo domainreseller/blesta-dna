@@ -42,6 +42,12 @@
                 ?>
             </li>
 
+            <?php
+
+                $this->Form->fieldText('current_id_protection', ($vars->registrar_lock ?? null) == 'true' ? 'true' : 'false' ,['type'=>'hidden']);
+                $this->Form->fieldText('current_privacy_state', ($vars->whois_privacy_state ?? null) == 'true' ? 'true' : 'false' ,['type'=>'hidden']);
+
+            ?>
 
         </ul>
     </div>
