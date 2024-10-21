@@ -19,52 +19,16 @@ class Domainnameapi extends RegistrarModule
     public function __construct()
     {
         // Load configuration required by this module
-        $this->loadConfig(dirname(__FILE__) . DS . 'config.json');
+        $this->loadConfig(dirname(__FILE__) . '/' . 'config.json');
 
         // Load components required by this module
         Loader::loadComponents($this, ['Input']);
 
         // Load the language required by this module
-        Language::loadLang('domainnameapi', null, dirname(__FILE__) . DS . 'language' . DS);
+        Language::loadLang('domainnameapi', null, dirname(__FILE__) . '/' . 'language' . '/');
 
-        Configure::load('domainnameapi', dirname(__FILE__) . DS . 'config' . DS);
+        Configure::load('domainnameapi', dirname(__FILE__) . '/' . 'config' . '/');
     }
-
-    /**
-     * Get a list of the TLD prices
-     *
-     * @param int|null $module_row_id The ID of the module row to fetch for the current module
-     * @return array A list of all TLDs and their pricing
-     *    [tld => [currency => [year# => ['register' => price, 'transfer' => price, 'renew' => price]]]]
-     */
-    public function getTldPricing($module_row_id=null)
-    {
-
-        Loader::loadModels($this, ['Currencies']);
-
-        // Fetch pricing from the registrar
-        $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
-
-        $all_tlds = $api->GetTldList(900);
-
-
-
-        $response = [];
-
-        if ($all_tlds['result'] == 'OK') {
-            foreach ($all_tlds['data'] as $k => $v) {
-                foreach (range($v['minperiod'], $v['maxperiod']) as $ky => $vy) {
-                    $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
-                    $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
-                    $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
-                }
-            }
-        }
-
-        return $response;
-    }
-
 
 
     /**
@@ -72,10 +36,10 @@ class Domainnameapi extends RegistrarModule
      * preventing the service from being added.
      *
      * @param stdClass $package A stdClass object representing the selected package
-     * @param array $vars An array of user supplied info to satisfy the request
-     * @param stdClass $parent_package A stdClass object representing the parent
+     * @param array|null $vars An array of user supplied info to satisfy the request
+     * @param null $parent_package A stdClass object representing the parent
      *  service's selected package (if the current service is an addon service)
-     * @param stdClass $parent_service A stdClass object representing the parent
+     * @param null $parent_service A stdClass object representing the parent
      *  service of the service being added (if the current service is an addon service
      *  and parent service has already been provisioned)
      * @param string $status The status of the service being added. These include:
@@ -376,7 +340,7 @@ class Domainnameapi extends RegistrarModule
         // Load the view into this object, so helpers can be automatically added to the view
         $this->view = new View('manage', 'default');
         $this->view->base_uri = $this->base_uri;
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html', 'Widget']);
@@ -398,7 +362,7 @@ class Domainnameapi extends RegistrarModule
         // Load the view into this object, so helpers can be automatically added to the view
         $this->view = new View('add_row', 'default');
         $this->view->base_uri = $this->base_uri;
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html', 'Widget']);
@@ -428,7 +392,7 @@ class Domainnameapi extends RegistrarModule
         // Load the view into this object, so helpers can be automatically added to the view
         $this->view = new View('edit_row', 'default');
         $this->view->base_uri = $this->base_uri;
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html', 'Widget']);
@@ -971,7 +935,7 @@ class Domainnameapi extends RegistrarModule
         $this->view->set('vars', $vars);
         $this->view->set('fields', $this->arrayToModuleFields($whois_fields, null, $vars)->getFields());
         $this->view->set('sections', $whois_sections);
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         return $this->view->fetch();
     }
@@ -1017,7 +981,7 @@ class Domainnameapi extends RegistrarModule
         }
 
         $this->view->set('vars', $vars);
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         return $this->view->fetch();
     }
@@ -1095,7 +1059,7 @@ class Domainnameapi extends RegistrarModule
         $this->view->set('id_protection', $id_protection);
         $this->view->set('epp_code', $epp_code);
         $this->view->set('vars', $vars);
-        $this->view->setDefaultView('components' . DS . 'modules' . DS . 'domainnameapi' . DS);
+        $this->view->setDefaultView('components' . '/' . 'modules' . '/' . 'domainnameapi' . '/');
 
         return $this->view->fetch();
     }
@@ -1488,16 +1452,7 @@ class Domainnameapi extends RegistrarModule
         return $this->getServiceName($service);
     }
 
-    /**
-     * Get a list of the TLDs supported by the registrar module
-     *
-     * @param int $module_row_id The ID of the module row to fetch for the current module
-     * @return array A list of all TLDs supported by the registrar module
-     */
-    public function getTlds($module_row_id = null)
-    {
-        return Configure::get('Domainnameapi.tlds');
-    }
+
 
     /**
      * Builds and returns the rules required to add/edit a module row
@@ -1551,6 +1506,66 @@ class Domainnameapi extends RegistrarModule
         return $resellerdetails['result']=='OK';
     }
 
+
+
+    /**
+     * Get a list of the TLD prices
+     *
+     * @param int|null $module_row_id The ID of the module row to fetch for the current module
+     * @return array A list of all TLDs and their pricing
+     *    [tld => [currency => [year# => ['register' => price, 'transfer' => price, 'renew' => price]]]]
+     * @throws SoapFault
+     */
+    public function getTldPricing($module_row_id=null)
+    {
+        return $this->getFilteredTldPricing($module_row_id);
+    }
+
+
+    public function getFilteredTldPricing($module_row_id=null, $filters = []){
+        Loader::loadModels($this, ['Currencies']);
+
+        // Fetch pricing from the registrar
+        $row = $this->getModuleRow($module_row_id);
+        $api = $this->getApi($row->meta->user, $row->meta->key);
+
+        $all_tlds = $api->GetTldList(900);
+
+
+
+        $response = [];
+
+        if ($all_tlds['result'] == 'OK') {
+            foreach ($all_tlds['data'] as $k => $v) {
+                foreach (range($v['minperiod'], $v['maxperiod']) as $ky => $vy) {
+                    $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
+                    $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
+                    $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
+                }
+            }
+        }
+
+
+
+
+
+
+
+        return $response;
+    }
+
+    /**
+     * Get a list of the TLDs supported by the registrar module
+     *
+     * @param int $module_row_id The ID of the module row to fetch for the current module
+     * @return array A list of all TLDs supported by the registrar module
+     */
+    public function getTlds($module_row_id = null)
+    {
+        return Configure::get('Domainnameapi.tlds');
+    }
+
+
     /**
      * Initializes the DomainNameApi and returns an instance of that object
      *
@@ -1563,7 +1578,7 @@ class Domainnameapi extends RegistrarModule
     {
 
         if (!class_exists("\DomainNameApi\DomainNameAPI_PHPLibrary")) {
-             Loader::load(dirname(__FILE__) . DS . 'apis' . DS . 'api.php');
+             Loader::load(dirname(__FILE__) . '/' . 'apis' . '/' . 'api.php');
         }
 
         return new DomainNameAPI_PHPLibrary($username, $key);
@@ -1681,7 +1696,7 @@ class Domainnameapi extends RegistrarModule
     private function fetchCache($key, $callback)
     {
         // Cache anahtarını oluştur
-        $cacheKey = Configure::get('Blesta.company_id') . DS . 'modules' . DS . 'domainnameapi' . DS . $key;
+        $cacheKey = Configure::get('Blesta.company_id') . '/' . 'modules' . '/' . 'domainnameapi' . '/' . $key;
 
         // Cache'den veriyi getir
         $cache = Cache::fetchCache($cacheKey);
