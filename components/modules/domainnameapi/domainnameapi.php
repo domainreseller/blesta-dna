@@ -1581,7 +1581,7 @@ class Domainnameapi extends RegistrarModule
              Loader::load(dirname(__FILE__) . '/' . 'apis' . '/' . 'api.php');
         }
 
-        return new DomainNameAPI_PHPLibrary($username, $key,DomainNameAPI_PHPLibrary::APPLICATION_BLESTA);
+        return new DomainNameAPI_PHPLibrary($username, $key);
     }
 
     /**
