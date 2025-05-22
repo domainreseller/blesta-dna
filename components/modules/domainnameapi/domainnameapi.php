@@ -1538,9 +1538,9 @@ class Domainnameapi extends RegistrarModule
         if ($all_tlds['result'] == 'OK') {
             foreach ($all_tlds['data'] as $k => $v) {
                 foreach (range($v['minperiod'], $v['maxperiod']) as $ky => $vy) {
-                    $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
+                    $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][$vy],3);
                     $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
-                    $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
+                    $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][$vy] ,3);
                 }
             }
         }
