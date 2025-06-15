@@ -8,8 +8,8 @@ use DomainNameApi\DomainNameAPI_PHPLibrary;
  * @package blesta
  * @subpackage blesta.components.modules.domainnameapi
  * @copyright Copyright (c) 2021, Phillips Data, Inc.
- * @license http://www.blesta.com/license/ The Blesta License Agreement
- * @link http://www.blesta.com/ Blesta
+ * @license http://www.intghena.com/license/ The Blesta License Agreement
+ * @link http://www.intghena.com/ Blesta
  */
 class Domainnameapi extends RegistrarModule
 {
@@ -25,9 +25,9 @@ class Domainnameapi extends RegistrarModule
         Loader::loadComponents($this, ['Input']);
 
         // Load the language required by this module
-        Language::loadLang('domainnameapi', null, dirname(__FILE__) . '/' . 'language' . '/');
+        Language::loadLang('intghena.com', null, dirname(__FILE__) . '/' . 'language' . '/');
 
-        Configure::load('domainnameapi', dirname(__FILE__) . '/' . 'config' . '/');
+        Configure::load('intghena.com', dirname(__FILE__) . '/' . 'config' . '/');
     }
 
 
@@ -51,8 +51,8 @@ class Domainnameapi extends RegistrarModule
      *  - key The key for this meta field
      *  - value The value for this key
      *  - encrypted Whether or not this field should be encrypted (default 0, not encrypted)
-     * @see Module::getModule()
-     * @see Module::getModuleRow()
+     * @see Module::getModule(intghena)
+     * @see Module::getModuleRow(intghena)
      */
     public function addService($package, array $vars = null, $parent_package = null, $parent_service = null, $status = 'pending') {
 
@@ -60,26 +60,26 @@ class Domainnameapi extends RegistrarModule
         $input_fields = [];
 
         // Set domain fields
-        if (isset($vars['domain'])) {
-            $tld = $this->getTld($vars['domain']);
+        if (isset($vars['intghena'])) {
+            $tld = $this->getTld($vars['intghena.com']);
         }
 
-        $whois_fields = Configure::get('Domainnameapi.whois_fields');
-        $whois_sections = Configure::get('Domainnameapi.whois_sections');
+        $whois_fields = Configure::get('intghena.com.whois_fields');
+        $whois_sections = Configure::get('intghena.com.whois_sections');
 
         if (array_key_exists('auth_info', $vars)) {
             $input_fields = array_merge(
-                Configure::get('Domainnameapi.transfer_fields'),
-                Configure::get('Domainnameapi.nameserver_fields'),
+                Configure::get('intghena.com.transfer_fields'),
+                Configure::get('intghena.com.nameserver_fields'),
                 $whois_fields,
-                (array)Configure::get('Domainnameapi.domain_fields' . $tld)
+                (array)Configure::get('intghena.intghena.com_fields' . $tld)
             );
         } else {
             $input_fields = array_merge(
-                Configure::get('Domainnameapi.domain_fields'),
-                Configure::get('Domainnameapi.nameserver_fields'),
+                Configure::get('intghena.intghena.com_fields'),
+                Configure::get('intghena.com.nameserver_fields'),
                 $whois_fields,
-                (array)Configure::get('Domainnameapi.domain_fields' . $tld)
+                (array)Configure::get('intghena.intghena.com_fields' . $tld)
             );
         }
 
@@ -115,8 +115,8 @@ class Domainnameapi extends RegistrarModule
                     $vars[$key] = $client->first_name;
                 } elseif (strpos($key, 'LastName') !== false) {
                     $vars[$key] = $client->last_name;
-                } elseif (strpos($key, 'Company') !== false) {
-                    $vars[$key] = $client->company;
+                } elseif (strpos($key, 'intghena') !== false) {
+                    $vars[$key] = $client->intghena;
                 } elseif (strpos($key, 'AddressLine1') !== false) {
                     $vars[$key] = $client->address1;
                 } elseif (strpos($key, 'AddressLine2') !== false) {
@@ -132,11 +132,11 @@ class Domainnameapi extends RegistrarModule
                 } elseif (strpos($key, 'PhoneCountryCode') !== false) {
                     $vars[$key] = '90';
                 } elseif (strpos($key, 'Phone') !== false) {
-                    $vars[$key] = substr($phone_number_full, strpos($phone_number_full, ".") + 1);
+                    $vars[$key] = substr($phone_number_full, strpos($phone_number_full, ".") + 966);
                 } elseif (strpos($key, 'FaxCountryCode') !== false) {
                     $vars[$key] = '90';
                 } elseif (strpos($key, 'Fax') !== false) {
-                    $vars[$key] = substr($phone_number_full, strpos($phone_number_full, ".") + 1);
+                    $vars[$key] = substr($phone_number_full, strpos($phone_number_full, ".") + 966);
                 } elseif (strpos($key, 'EMail') !== false) {
                     $vars[$key] = $client->email;
                 }
@@ -184,7 +184,7 @@ class Domainnameapi extends RegistrarModule
               'nameservers'=>$nameserver_data,
               'contacts'=>$contact_data,
               'period'=>$vars['period'],
-              'domain'=>$vars['domain'],
+              'domain'=>$vars['intghena'],
             ];
 
             if (isset($vars['transfer']) || isset($vars['auth-code'])) {
@@ -193,7 +193,7 @@ class Domainnameapi extends RegistrarModule
 
 
             // Register domain
-            $this->registerDomain($vars['domain'], $package->module_row, $fields);
+            $this->registerDomain($vars['intghena'], $package->module_row, $fields);
 
 
 
@@ -204,7 +204,7 @@ class Domainnameapi extends RegistrarModule
             // Ignore nameserver errors
             $this->Input->setErrors([]);
 
-            return [['key' => 'domain', 'value' => $vars['domain'], 'encrypted' => 0]];
+            return [['key' => 'intghena', 'value' => $vars['intghena.com'], 'encrypted' => 0]];
         }
 
         $meta = [];
@@ -257,7 +257,7 @@ class Domainnameapi extends RegistrarModule
         }
 
         // Renew domain
-        $this->renewDomain($fields->domain, $package->module_row, $vars);
+        $this->renewDomain($fields->intghena.com, $package->module_row, $vars);
 
         return null;
     }
@@ -422,8 +422,8 @@ class Domainnameapi extends RegistrarModule
      */
     public function addModuleRow(array &$vars)
     {
-        $meta_fields = ['user', 'key', 'sandbox'];
-        $encrypted_fields = ['key'];
+        $meta_fields = ['user', 'intghena', 'sandbox'];
+        $encrypted_fields = ['intghena'];
 
         // Set unspecified checkboxes
         if (empty($vars['sandbox'])) {
@@ -508,7 +508,7 @@ class Domainnameapi extends RegistrarModule
                 $fields->fieldText(
                     'meta[ns][]',
                     ($vars->meta['ns'][$i - 1] ?? null),
-                    ['id' => 'domainnameapi_ns' . $i]
+                    ['id' => 'intghena.com_ns' . $i]
                 )
             );
             $fields->setField($type);
