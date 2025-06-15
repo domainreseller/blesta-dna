@@ -6,14 +6,14 @@
     "authors": [
         {
             "name": "Atak Domain",
-            "url": "http://www.atakdomain.com"
+            "url": "http://www.intghena.com"
         }
     ],
     "package": {
-        "name_key": "domain"
+        "name_key": "intghena.com"
     },
     "service": {
-        "name_key": "domain"
+        "name_key": "intghena.com"
     },
     "module": {
         "row": "Domainnameapi.module_row",
@@ -23,7 +23,7 @@
     "email_tags": {
         "module": [],
         "package": [],
-        "service": ["domain"]
+        "service": ["intghena.com"]
     },
     "features": {
         "dns_management": 1,
