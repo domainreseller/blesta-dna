@@ -1538,11 +1538,15 @@ class Domainnameapi extends RegistrarModule
         if ($all_tlds["result"] == "OK") {
             foreach ($all_tlds["data"] as $k => $v) {
                 foreach (range($v['minperiod'], $v['maxperiod']) as $ky => $vy) {
-
                     try {
-                        $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
-                        $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
-                        $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
+
+                        $registerPrice = $v['pricing']['registration'][$vy] ?? $v['pricing']['registration'][1] * $vy;
+                        $transferPrice = $v['pricing']['transfer'][1] * $vy;
+                        $renewPrice =  $v['pricing']['renew'][$vy] ?? $v['pricing']['renew'][1] * $vy;
+
+                        $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($registerPrice,3);
+                        $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($transferPrice,3);
+                        $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($renewPrice,3);
                     } catch (Exception $e) {
                         $invalids[$v["tld"]] = $v;
                     }
@@ -1571,7 +1575,9 @@ class Domainnameapi extends RegistrarModule
         $response = [];
         if ($all_tlds["result"] == "OK") {
             foreach ($all_tlds["data"] as $k => $v) {
+                if(isset($v["tld"]) && !empty($v["tld"])){
                 array_push($response, "." . $v["tld"]);
+                }
             }
         }
         return $response;
@@ -1626,8 +1632,7 @@ class Domainnameapi extends RegistrarModule
         $result_success                      = (is_array($last_response) && is_string(key($last_response)) && $last_response[key($last_response)]["OperationResult"] == "SUCCESS");
         $last_request['request']['Password'] = '******';
         $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_request, true), 'input', true);
-        $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_response, true), 'output',
-            $result_success);
+        $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_response, true), 'output', $result_success);
     }
 
     /**
