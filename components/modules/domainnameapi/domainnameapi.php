@@ -1534,35 +1534,46 @@ class Domainnameapi extends RegistrarModule
 
 
         $response = [];
-
-        if ($all_tlds['result'] == 'OK') {
-            foreach ($all_tlds['data'] as $k => $v) {
+        $invalids = [];
+        if ($all_tlds["result"] == "OK") {
+            foreach ($all_tlds["data"] as $k => $v) {
                 foreach (range($v['minperiod'], $v['maxperiod']) as $ky => $vy) {
-                    $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
-                    $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
-                    $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
+                    try {
+                        $response['.' . $v['tld']]['USD'][$vy]['register'] = number_format($v['pricing']['registration'][1] * $vy,3);
+                        $response['.' . $v['tld']]['USD'][$vy]['transfer'] = number_format($v['pricing']['transfer'][1] * $vy,3);
+                        $response['.' . $v['tld']]['USD'][$vy]['renew']    = number_format($v['pricing']['renew'][1] * $vy,3);
+                    } catch (Exception $e) {
+                        $invalids[$v["tld"]] = $v;
+                    }
                 }
             }
         }
-
-
-
-
-
-
-
+        if (!empty($invalids)) {
+            $this->log($api->getServiceUrl() . "|" . "getFilteredTldPricing",json_encode($invalids, true),"input",false);
+        }
         return $response;
     }
 
     /**
      * Get a list of the TLDs supported by the registrar module
      *
-     * @param int $module_row_id The ID of the module row to fetch for the current module
+     * @param int|null $module_row_id The ID of the module row to fetch for the current module
      * @return array A list of all TLDs supported by the registrar module
      */
     public function getTlds($module_row_id = null)
     {
-        return Configure::get('Domainnameapi.tlds');
+        $row = $this->getModuleRow($module_row_id);
+        $row = !empty($row) ? $row : $this->getModuleRows()[0];
+        $api = $this->getApi($row->meta->user, $row->meta->key);
+
+        $all_tlds = $api->GetTldList(1000);
+        $response = [];
+        if ($all_tlds["result"] == "OK") {
+            foreach ($all_tlds["data"] as $k => $v) {
+                array_push($response, "." . $v["tld"]);
+            }
+        }
+        return $response;
     }
 
 
