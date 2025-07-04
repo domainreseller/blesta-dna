@@ -1074,7 +1074,7 @@ class Domainnameapi extends RegistrarModule
     public function checkAvailability($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $tld = $this->extractTld($domain);
         $sld = $this->extractSLD($domain);
@@ -1120,7 +1120,7 @@ class Domainnameapi extends RegistrarModule
     public function getDomainContacts($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $contactResult = $api->GetContacts($domain);
 
@@ -1151,7 +1151,7 @@ class Domainnameapi extends RegistrarModule
     public function setDomainContacts($domain, array $vars = [], $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $saveContact =$api->SaveContacts($domain, $vars);
 
@@ -1172,7 +1172,7 @@ class Domainnameapi extends RegistrarModule
     public function getDomainInfo($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $domainInfo = $this->fetchCache('domainInfo_'.$domain, function() use ($api, $domain) {
 
@@ -1251,7 +1251,7 @@ class Domainnameapi extends RegistrarModule
     public function setDomainNameservers($domain, $module_row_id = null, array $vars = [])
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
 
         $nslist = [];
@@ -1277,7 +1277,7 @@ class Domainnameapi extends RegistrarModule
     public function lockDomain($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->EnableTheftProtectionLock($domain);
         $this->processResponse($api);
@@ -1295,7 +1295,7 @@ class Domainnameapi extends RegistrarModule
     public function unlockDomain($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
 
         $response = $api->DisableTheftProtectionLock($domain);
@@ -1307,7 +1307,7 @@ class Domainnameapi extends RegistrarModule
     public function enablePrivacyProtection($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->ModifyPrivacyProtectionStatus($domain,true);
         $this->processResponse($api);
@@ -1317,7 +1317,7 @@ class Domainnameapi extends RegistrarModule
     public function disablePrivacyProtection($domain, $module_row_id = null)
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->ModifyPrivacyProtectionStatus($domain,false);
         $this->processResponse($api);
@@ -1340,7 +1340,7 @@ class Domainnameapi extends RegistrarModule
     public function registerDomain($domain, $module_row_id = null, array $vars = [])
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         if($vars['auth_code']){
 
@@ -1395,7 +1395,7 @@ class Domainnameapi extends RegistrarModule
     public function renewDomain($domain, $module_row_id = null, array $vars = [])
     {
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $renewResponse = $api->Renew($domain, $vars['year']);
 
@@ -1420,7 +1420,7 @@ class Domainnameapi extends RegistrarModule
         $module_row_id = $service->module_row_id ?? null;
 
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $domainDetail = $api->GetDetails($domain);
 
@@ -1499,14 +1499,16 @@ class Domainnameapi extends RegistrarModule
      */
     public function validateConnection($key, $user, $sandbox)
     {
-        $api = $this->getApi($user, $key);
+        $api = $this->getApi($user, $key,$sandbox);
 
         $resellerdetails = $api->GetResellerDetails();
 
         return $resellerdetails['result']=='OK';
     }
 
-
+    public function makeTest($key,$user,$sandbox = false){
+        return $key.'|' . $user . '|' . ($sandbox ? 'true' : 'false');
+    }
 
     /**
      * Get a list of the TLD prices
@@ -1527,7 +1529,7 @@ class Domainnameapi extends RegistrarModule
 
         // Fetch pricing from the registrar
         $row = $this->getModuleRow($module_row_id);
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $all_tlds = $api->GetTldList(900);
 
@@ -1569,7 +1571,7 @@ class Domainnameapi extends RegistrarModule
     {
         $row = $this->getModuleRow($module_row_id);
         $row = !empty($row) ? $row : $this->getModuleRows()[0];
-        $api = $this->getApi($row->meta->user, $row->meta->key);
+        $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $all_tlds = $api->GetTldList(1000);
         $response = [];
@@ -1592,14 +1594,14 @@ class Domainnameapi extends RegistrarModule
      * @return DomainNameAPI_PHPLibrary The DomainNameApiInstance instance
      * @throws SoapFault
      */
-    private function getApi($username, $key)
+    private function getApi($username, $key,$sandbox = false)
     {
 
         if (!class_exists("\DomainNameApi\DomainNameAPI_PHPLibrary")) {
              Loader::load(dirname(__FILE__) . '/' . 'apis' . '/' . 'api.php');
         }
 
-        return new DomainNameAPI_PHPLibrary($username, $key);
+        return new DomainNameAPI_PHPLibrary($username, $key,$sandbox);
     }
 
     /**

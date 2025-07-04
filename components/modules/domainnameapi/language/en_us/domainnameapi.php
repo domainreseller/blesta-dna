@@ -17,10 +17,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'Edit';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Delete';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Are you sure you want to delete this account?';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'There are no accounts.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'Yes';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'No';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Items marked with asterisk come from DomainNameApi, if "-" appears it means the password is wrong or connection cannot be established.';
 
 // Row Meta
 $lang['Domainnameapi.row_meta.user'] = 'Api Username';
 $lang['Domainnameapi.row_meta.key']  = 'Api Password';
+$lang['Domainnameapi.row_meta.sandbox'] = 'Test mode';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'Test mode / Sandbox mode';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'For test mode, you need to create a user and password from the test environment. You can manage specific extensions for testing ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test environment user URL :';
+$lang['Domainnameapi.row_meta.userId'] = 'User ID';
+$lang['Domainnameapi.row_meta.userName'] = 'User Title';
+$lang['Domainnameapi.row_meta.userbalances'] = 'User Balance';
 
 // Add row
 $lang['Domainnameapi.add_row.box_title']   = 'Add Domain Name Api Account';
@@ -28,7 +37,7 @@ $lang['Domainnameapi.add_row.basic_title'] = 'Authentication Settings';
 $lang['Domainnameapi.add_row.add_btn']     = 'Add Account';
 
 // Edit row
-$lang['Domainnameapi.edit_row.box_title']   = 'Edit DomainNameAoi Account';
+$lang['Domainnameapi.edit_row.box_title']   = 'Edit DomainNameApi Account';
 $lang['Domainnameapi.edit_row.basic_title'] = 'Basic Settings';
 $lang['Domainnameapi.edit_row.add_btn']     = 'Update Account';
 

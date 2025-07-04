@@ -17,10 +17,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'Modifier';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Supprimer';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Êtes-vous sûr de vouloir supprimer ce compte ?';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Aucun compte disponible.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'Oui';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'Non';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Les éléments marqués d\'un astérisque proviennent de DomainNameApi, si "-" apparaît cela signifie que le mot de passe est incorrect ou que la connexion ne peut pas être établie.';
 
 // Métadonnées de la ligne
 $lang['Domainnameapi.row_meta.user'] = 'Nom d\'utilisateur API';
 $lang['Domainnameapi.row_meta.key']  = 'Mot de passe API';
+$lang['Domainnameapi.row_meta.sandbox'] = 'Mode test';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'Mode test / Mode sandbox';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Pour le mode test, vous devez créer un utilisateur et un mot de passe depuis l\'environnement de test. Vous pouvez gérer des extensions spécifiques pour les tests ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). URL utilisateur environnement de test :';
+$lang['Domainnameapi.row_meta.userId'] = 'ID utilisateur';
+$lang['Domainnameapi.row_meta.userName'] = 'Titre utilisateur';
+$lang['Domainnameapi.row_meta.userbalances'] = 'Solde utilisateur';
 
 // Ajouter une ligne
 $lang['Domainnameapi.add_row.box_title']   = 'Ajouter un compte Domain Name Api';

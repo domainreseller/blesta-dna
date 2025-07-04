@@ -16,10 +16,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'Bewerken';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Verwijderen';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Weet u zeker dat u dit account wilt verwijderen?';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Er zijn geen accounts.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'Ja';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'Nee';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Items gemarkeerd met een asterisk komen van DomainNameApi, als "-" verschijnt betekent dit dat het wachtwoord verkeerd is of er geen verbinding kan worden gemaakt.';
 
 // Rijmeta
 $lang['Domainnameapi.row_meta.user'] = 'API-gebruikersnaam';
 $lang['Domainnameapi.row_meta.key']  = 'API-wachtwoord';
+$lang['Domainnameapi.row_meta.sandbox'] = 'Testmodus';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'Testmodus / Sandbox-modus';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Voor testmodus moet u een gebruiker en wachtwoord aanmaken vanuit de testomgeving. U kunt specifieke extensies beheren voor testen ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testomgeving gebruiker URL :';
+$lang['Domainnameapi.row_meta.userId'] = 'Gebruiker ID';
+$lang['Domainnameapi.row_meta.userName'] = 'Gebruikerstitel';
+$lang['Domainnameapi.row_meta.userbalances'] = 'Gebruikerssaldo';
 
 // Rij toevoegen
 $lang['Domainnameapi.add_row.box_title']   = 'Domain Name Api-account toevoegen';

@@ -1,12 +1,15 @@
 {
-    "version": "1.0.18",
+    "version": "1.0.19",
     "type": "registrar",
     "name": "Domainnameapi",
     "description": "DomainNameApi is a domain registration module that allows you to register and manage domain names. More Than 800 extension!",
     "authors": [
         {
             "name": "Atak Domain",
-            "url": "http://www.atakdomain.com"
+            "url": "https://www.atakdomain.com"
+        },{
+            "name": "Bünyamin AKÇAY",
+            "url": "https://bunyam.in"
         }
     ],
     "package": {
