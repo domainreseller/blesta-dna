@@ -16,10 +16,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'Bearbeiten';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Löschen';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Sind Sie sicher, dass Sie dieses Konto löschen möchten?';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Es gibt keine Konten.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'Ja';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'Nein';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Mit Sternchen markierte Elemente kommen von DomainNameApi, wenn "-" erscheint bedeutet es, dass das Passwort falsch ist oder keine Verbindung hergestellt werden kann.';
 
 // Zeilen-Metadaten
 $lang['Domainnameapi.row_meta.user'] = 'API-Benutzername';
 $lang['Domainnameapi.row_meta.key']  = 'API-Passwort';
+$lang['Domainnameapi.row_meta.sandbox'] = 'Testmodus';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'Testmodus / Sandbox-Modus';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Für den Testmodus müssen Sie einen Benutzer und ein Passwort aus der Testumgebung erstellen. Sie können bestimmte Erweiterungen zum Testen verwalten ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testumgebung Benutzer URL :';
+$lang['Domainnameapi.row_meta.userId'] = 'Benutzer-ID';
+$lang['Domainnameapi.row_meta.userName'] = 'Benutzertitel';
+$lang['Domainnameapi.row_meta.userbalances'] = 'Benutzerguthaben';
 
 // Zeile hinzufügen
 $lang['Domainnameapi.add_row.box_title']   = 'Domain Name Api-Konto hinzufügen';

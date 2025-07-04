@@ -16,10 +16,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'تحرير';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'حذف';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'هل أنت متأكد من أنك تريد حذف هذا الحساب؟';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'لا توجد حسابات.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'نعم';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'لا';
+$lang['Domainnameapi.manage.module_remote_info']          = '* العناصر المميزة بعلامة النجمة تأتي من DomainNameApi، إذا ظهر "-" فهذا يعني أن كلمة المرور خاطئة أو لا يمكن إنشاء الاتصال.';
 
 // بيانات الصف
 $lang['Domainnameapi.row_meta.user'] = 'اسم المستخدم لـ API';
 $lang['Domainnameapi.row_meta.key']  = 'كلمة مرور API';
+$lang['Domainnameapi.row_meta.sandbox'] = 'وضع الاختبار';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'وضع الاختبار / وضع الاختبار المؤقت';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'لوضع الاختبار، تحتاج إلى إنشاء مستخدم وكلمة مرور من بيئة الاختبار. يمكنك إدارة امتدادات محددة للاختبار ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). رابط مستخدم بيئة الاختبار :';
+$lang['Domainnameapi.row_meta.userId'] = 'معرف المستخدم';
+$lang['Domainnameapi.row_meta.userName'] = 'عنوان المستخدم';
+$lang['Domainnameapi.row_meta.userbalances'] = 'رصيد المستخدم';
 
 // إضافة صف
 $lang['Domainnameapi.add_row.box_title']   = 'إضافة حساب Domain Name Api';

@@ -24,6 +24,17 @@ $this->Widget->create($this->_('Domainnameapi.edit_row.box_title', true));
                 $this->Form->fieldText('key', ($vars->key ?? null), ['id' => 'key', 'type' => 'password']);
                 ?>
             </li>
+            <li>
+                <?php
+                $this->Form->label($this->_('Domainnameapi.row_meta.sandboxheader', true), 'sandbox');
+
+                $this->Form->fieldCheckbox('sandbox', 'true', (isset($vars->sandbox) ? $vars->sandbox : null) == 'true', ['id' => 'sandbox']);
+                $this->Form->label($this->_('Domainnameapi.row_meta.sandbox', true), 'sandbox',['class' => 'inline']);
+
+                ?>
+                <p><?php echo $this->_('Domainnameapi.row_meta.sandboxwarning', true); ?> <a href="https://cp-ote.domainnameapi.com/" target="_blank" rel="noopener">https://cp-ote.domainnameapi.com/</a></p>
+
+            </li>
         </ul>
     </div>
 

@@ -16,10 +16,19 @@ $lang['Domainnameapi.manage.module_rows.edit']            = 'Düzenle';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Sil';
 $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Bu hesabı silmek istediğinizden emin misiniz?';
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Hiç hesap yok.';
+$lang['Domainnameapi.manage.sandbox_yes']                 = 'Evet';
+$lang['Domainnameapi.manage.sandbox_no']                  = 'Hayır';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Olanlar DomainNameApi tarafından gelir, "-" gelirse şifre yanlış ya da bağlantı kurulamıyor anlamına gelir.';
 
 // Satır Meta Verileri
 $lang['Domainnameapi.row_meta.user'] = 'API Kullanıcı Adı';
 $lang['Domainnameapi.row_meta.key']  = 'API Şifresi';
+$lang['Domainnameapi.row_meta.sandbox'] = 'Test modu';
+$lang['Domainnameapi.row_meta.sandboxheader'] = 'Test modu / Sandbox modu';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Test modu için test ortamından kullanıcı ve şifre açmanız gereklidir. Test için belirli uzantıları yönetebilirsiniz ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test ortamı için kullanıcı URL :';
+$lang['Domainnameapi.row_meta.userId'] = 'User ID';
+$lang['Domainnameapi.row_meta.userName'] = 'User Ünvan';
+$lang['Domainnameapi.row_meta.userbalances'] = 'User Bakiyesi';
 
 // Satır Ekle
 $lang['Domainnameapi.add_row.box_title']   = 'Domain Name Api Hesabı Ekle';

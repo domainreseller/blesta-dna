@@ -15,43 +15,76 @@ if ($num_rows > 0) {
 $this->Widget->clear();
 $this->Widget->setLinkButtons($link_buttons);
 
-$this->Widget->create($this->_('AdminCompanyModules.manage.boxtitle_manage', true,
-    (isset($module->name) ? $this->Html->safe($module->name) : null)), ['id' => 'manage_domainnameapi']);
+$this->Widget->create($this->_('AdminCompanyModules.manage.boxtitle_manage', true,  (isset($module->name) ? $this->Html->safe($module->name) : null)), ['id' => 'manage_domainnameapi']);
+
+try{
+   require_once __DIR__.'/../../apis/api.php';
+}catch (Exception $e) {
+    // If the API file is not found, we can ignore it as it is not critical for the module management view.
+    // This is a common practice to ensure that the view can still render even if the API file is missing.
+}
+
 ?>
 
 <div class="title_row first">
-    <h3><?php
-        $this->_('Domainnameapi.manage.module_rows_title'); ?></h3>
+    <h3><?php $this->_('Domainnameapi.manage.module_rows_title'); ?></h3>
 </div>
 <?php
+$lastid =0;
 
 if ($num_rows > 0) {
     ?>
     <table class="table">
         <tr class="heading_row">
-            <td><span><?php
-                    $this->_('Domainnameapi.manage.module_rows_heading.user'); ?></span></td>
-            <td><span><?php
-                    $this->_('Domainnameapi.manage.module_rows_heading.key'); ?></span></td>
-            <td class="last"><span><?php
-                    $this->_('Domainnameapi.manage.module_rows_heading.options'); ?></span></td>
+            <td><span><?php  $this->_('Domainnameapi.manage.module_rows_heading.user'); ?></span></td>
+            <td><span><?php  $this->_('Domainnameapi.manage.module_rows_heading.key'); ?></span></td>
+            <td><span><?php  $this->_('Domainnameapi.row_meta.sandbox'); ?></span></td>
+            <td><span><?php  $this->_('Domainnameapi.row_meta.userId'); ?>*</span></td>
+            <td><span><?php  $this->_('Domainnameapi.row_meta.userName'); ?>*</span></td>
+            <td><span><?php  $this->_('Domainnameapi.row_meta.userbalances'); ?>*</span></td>
+            <td class="last"><span><?php $this->_('Domainnameapi.manage.module_rows_heading.options'); ?></span></td>
         </tr>
         <?php
         for ($i = 0; $i < $num_rows; $i++) {
+            $lastid = $i;
+            $userId = '';
+            $userName = '';
+            $userBalances = '';
+
+            try{
+                $sandbox = $module->rows[$lastid]->meta->sandbox ?? false;
+                $dna = new \DomainNameApi\DomainNameAPI_PHPLibrary($module->rows[$lastid]->meta->user,$module->rows[$lastid]->meta->key, $sandbox);
+                $details = $dna->GetResellerDetails();
+                if ($details['result'] == 'OK') {
+                    $userName = $details['name'];
+                    $userId= $details['id'];
+                    $balances_=[];
+                    foreach ($details['balances'] as $k => $v) {
+                        $balances_[]= "<b>{$v['balance']}{$v['symbol']}</b>";
+                     }
+                    $userBalances = implode(' | ', $balances_);
+                } else {
+                    $userId = '-';
+                    $userName = '-';
+                    $userBalances = '-';
+                }
+            }catch (Exception $e) {
+
+            }
+
+
             ?>
             <tr<?php
             echo ($i % 2 == 1) ? ' class="odd_row"' : ''; ?>>
-                <td><?php
-                    echo(isset($module->rows[$i]->meta->user) ? $this->Html->safe($module->rows[$i]->meta->user) : null); ?></td>
-                <td><?php
-                    echo(isset($module->rows[$i]->meta->key) ? substr($this->Html->safe($module->rows[$i]->meta->key),
-                            0, 1) . str_repeat('*',
-                            strlen($this->Html->safe($module->rows[$i]->meta->key)) - 1) : null); ?></td>
+                <td><?php  echo(isset($module->rows[$i]->meta->user) ? $this->Html->safe($module->rows[$i]->meta->user) : null); ?></td>
+                <td><?php  echo(isset($module->rows[$i]->meta->key) ? substr($this->Html->safe($module->rows[$i]->meta->key),  0, 1) . str_repeat('*', strlen($this->Html->safe($module->rows[$i]->meta->key)) - 1) : null); ?></td>
+                <td><?php  echo(isset($module->rows[$i]->meta->sandbox) && $module->rows[$i]->meta->sandbox=='true'?  $this->_('Domainnameapi.manage.sandbox_yes',true) : $this->_('Domainnameapi.manage.sandbox_no',true)); ?></td>
+                <td><?php  echo $userId; ?></td>
+                <td><?php  echo $userName; ?></td>
+                <td><?php  echo $userBalances; ?></td>
 
                 <td>
-                    <a href="<?php
-                    echo $this->Html->safe($this->base_uri . 'settings/company/modules/editrow/' . ($module->id ?? null) . '/' . ($module->rows[$i]->id ?? null) . '/'); ?>"><?php
-                        $this->_('Domainnameapi.manage.module_rows.edit'); ?></a>
+                    <a href="<?php  echo $this->Html->safe($this->base_uri . 'settings/company/modules/editrow/' . ($module->id ?? null) . '/' . ($module->rows[$i]->id ?? null) . '/'); ?>"><?php  $this->_('Domainnameapi.manage.module_rows.edit'); ?></a>
                     <?php
                     $this->Form->create($this->base_uri . 'settings/company/modules/deleterow/');
                     $this->Form->fieldHidden('id', ($module->id ?? null));
@@ -59,8 +92,7 @@ if ($num_rows > 0) {
                     ?>
                     <a href="<?php
                     echo $this->Html->safe($this->base_uri . 'settings/company/modules/deleterow/' . ($module->id ?? null) . '/' . ($module->rows[$i]->id ?? null) . '/'); ?>" class="manage" rel="<?php
-                    echo $this->Html->safe($this->_('Domainnameapi.manage.module_rows.confirm_delete', true)); ?>"><?php
-                        $this->_('Domainnameapi.manage.module_rows.delete'); ?></a>
+                    echo $this->Html->safe($this->_('Domainnameapi.manage.module_rows.confirm_delete', true)); ?>"><?php $this->_('Domainnameapi.manage.module_rows.delete'); ?></a>
                     <?php
                     $this->Form->end();
                     ?>
@@ -70,6 +102,16 @@ if ($num_rows > 0) {
             <?php
         }
         ?>
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="button_row">
+                        <?php ?>
+                        <p><?php echo $this->_('Domainnameapi.manage.module_remote_info'); ?></p>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
     </table>
     <?php
 } else {
