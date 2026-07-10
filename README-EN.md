@@ -12,6 +12,12 @@
 
 This module is an integration of 'domainnameapi.com' developed for Blesta. (Updated on August 15, 2024)
 
+## 📦 Download — always use Releases!
+
+⬇️ **Get the latest tested version here: https://github.com/domainreseller/blesta-dna/releases/latest**
+
+> ⚠️ Do **not** use the green **Code → Download ZIP** button — that downloads the raw development branch. Release packages are versioned, tested and production-ready.
+
 ## Requirements
 
 - Blesta version 5.3 or above is required.
@@ -22,6 +28,20 @@ This module is an integration of 'domainnameapi.com' developed for Blesta. (Upda
 
 * Copy the downloaded files to blesta/components/modules/domainnameapi/.
 * Activate it from the Settings > Modules menu.
+
+## 🔑 API Credentials — Username/Password or Reseller ID/API Key?
+
+Both are supported — enter them into the same two module fields; the module detects which API to use automatically:
+
+| You have | "Username" field | "Password" field | API used |
+|---|---|---|---|
+| **New panel credentials** (recommended) | Reseller ID — UUID like `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` | API Key | REST |
+| **Legacy credentials** | API username | API password | SOAP |
+
+> 💡 Find your **Reseller ID** and **API Key** in your DomainNameAPI panel under **API Settings**.
+> ⚠️ These are **API credentials** — your panel login e-mail and password will **not** work here.
+
+No extra configuration is needed — if the username field contains a UUID the module uses the modern REST API, otherwise classic SOAP.
 
 
 <img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">

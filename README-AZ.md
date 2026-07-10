@@ -12,6 +12,12 @@
 
 Bu modul, Blesta üçün inkişaf etdirilmiş 'domainnameapi.com' inteqrasiyasıdır. (Yenilənmə 15 Avqust 2024)
 
+## 📦 Yükləmə — həmişə Releases istifadə edin!
+
+⬇️ **Ən son test edilmiş versiyanı buradan yükləyin: https://github.com/domainreseller/blesta-dna/releases/latest**
+
+> ⚠️ Yaşıl **Code → Download ZIP** düyməsini **istifadə etməyin** — bu düymə xam inkişaf (development) qolunu yükləyir. Release paketləri versiyalanmış, test edilmiş və istehsalata hazırdır.
+
 ## Tələblər
 
 - Blesta'nın 5.3 və yuxarı versiyası tələb olunur.
@@ -22,6 +28,20 @@ Bu modul, Blesta üçün inkişaf etdirilmiş 'domainnameapi.com' inteqrasiyası
 
 * Yüklədiyiniz faylları blesta/components/modules/domainnameapi/ yerləşdirin.
 * Parametrlər > Modullar menyusundan aktivləşdirin.
+
+## 🔑 API Məlumatları — İstifadəçi adı/Şifrə, yoxsa Reseller ID/API Key?
+
+Hər ikisi dəstəklənir — məlumatları modulun eyni iki sahəsinə daxil edin; modul hansı API-nin istifadə olunacağını avtomatik müəyyən edir:
+
+| Sizdə olan | "İstifadəçi adı" sahəsi | "Şifrə" sahəsi | İstifadə olunan API |
+|---|---|---|---|
+| **Yeni panel məlumatları** (tövsiyə olunur) | Reseller ID — `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` formatında UUID | API Key | REST |
+| **Köhnə (legacy) məlumatlar** | API istifadəçi adı | API şifrəsi | SOAP |
+
+> 💡 **Reseller ID** və **API Key** məlumatlarınızı DomainNameAPI panelinizdə **API Ayarları (API Settings)** bölməsində tapa bilərsiniz.
+> ⚠️ Bunlar **API məlumatlarıdır** — panelə giriş üçün istifadə etdiyiniz e-poçt və şifrə burada **işləməyəcək**.
+
+Əlavə konfiqurasiya tələb olunmur — istifadəçi adı sahəsində UUID varsa, modul müasir REST API-dən, əks halda klassik SOAP-dan istifadə edir.
 
 
   <img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">

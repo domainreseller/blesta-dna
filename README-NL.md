@@ -13,6 +13,12 @@
 
 Deze module is een integratie van 'domainnameapi.com' ontwikkeld voor Blesta. (Bijgewerkt op 15 augustus 2024)
 
+## 📦 Downloaden — gebruik altijd de Releases!
+
+⬇️ **Download hier de nieuwste geteste versie: https://github.com/domainreseller/blesta-dna/releases/latest**
+
+> ⚠️ Gebruik **niet** de groene knop **Code → Download ZIP** — die downloadt de ruwe ontwikkelbranch. Release-pakketten zijn geversioneerd, getest en klaar voor productie.
+
 ## Vereisten
 
 - Blesta versie 5.3 of hoger is vereist.
@@ -23,6 +29,20 @@ Deze module is een integratie van 'domainnameapi.com' ontwikkeld voor Blesta. (B
 
 * Kopieer de gedownloade bestanden naar blesta/components/modules/domainnameapi/.
 * Activeer het vanuit het menu Instellingen > Modules.
+
+## 🔑 API-gegevens — Gebruikersnaam/Wachtwoord of Reseller ID/API Key?
+
+Beide worden ondersteund — vul ze in dezelfde twee modulevelden in; de module detecteert automatisch welke API wordt gebruikt:
+
+| Je hebt | Veld "Gebruikersnaam" | Veld "Wachtwoord" | Gebruikte API |
+|---|---|---|---|
+| **Nieuwe panelgegevens** (aanbevolen) | Reseller ID — UUID zoals `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` | API Key | REST |
+| **Oude (legacy) gegevens** | API-gebruikersnaam | API-wachtwoord | SOAP |
+
+> 💡 Je vindt je **Reseller ID** en **API Key** in je DomainNameAPI-panel onder **API-instellingen**.
+> ⚠️ Dit zijn **API-gegevens** — het e-mailadres en wachtwoord waarmee je op het panel inlogt, werken hier **niet**.
+
+Er is geen extra configuratie nodig — bevat het gebruikersnaamveld een UUID, dan gebruikt de module de moderne REST API, anders klassiek SOAP.
 
 
 <img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">
