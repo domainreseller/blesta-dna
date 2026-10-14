@@ -1155,9 +1155,9 @@ class Domainnameapi extends RegistrarModule
 
         $saveContact =$api->SaveContacts($domain, $vars);
 
-        $this->processResponse($api);
+        $this->processResponse($api, $saveContact);
 
-        return $saveContact['status'] == 'OK';
+        return $saveContact['result'] == 'OK';
     }
 
     /**
@@ -1262,9 +1262,9 @@ class Domainnameapi extends RegistrarModule
 
         $nameserverResponse =  $api->ModifyNameServer($domain, $nslist);
 
-        $this->processResponse($api);
+        $this->processResponse($api, $nameserverResponse);
 
-        return $nameserverResponse['status'] == 'OK';
+        return $nameserverResponse['result'] == 'OK';
     }
 
     /**
@@ -1280,7 +1280,7 @@ class Domainnameapi extends RegistrarModule
         $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->EnableTheftProtectionLock($domain);
-        $this->processResponse($api);
+        $this->processResponse($api, $response);
 
         return $response['result'] == 'OK';
     }
@@ -1299,7 +1299,7 @@ class Domainnameapi extends RegistrarModule
 
 
         $response = $api->DisableTheftProtectionLock($domain);
-        $this->processResponse($api);
+        $this->processResponse($api, $response);
 
         return $response['result'] == 'OK';
     }
@@ -1310,7 +1310,7 @@ class Domainnameapi extends RegistrarModule
         $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->ModifyPrivacyProtectionStatus($domain,true);
-        $this->processResponse($api);
+        $this->processResponse($api, $response);
 
         return $response['result'] == 'OK';
     }
@@ -1320,7 +1320,7 @@ class Domainnameapi extends RegistrarModule
         $api = $this->getApi($row->meta->user, $row->meta->key,$row->meta->sandbox == 'true');
 
         $response = $api->ModifyPrivacyProtectionStatus($domain,false);
-        $this->processResponse($api);
+        $this->processResponse($api, $response);
 
         return $response['result'] == 'OK';
     }
@@ -1362,7 +1362,7 @@ class Domainnameapi extends RegistrarModule
 
 
 
-        $this->processResponse($api);
+        $this->processResponse($api, $registerResult);
 
         return $registerResult['result'] == 'OK';
     }
@@ -1399,9 +1399,9 @@ class Domainnameapi extends RegistrarModule
 
         $renewResponse = $api->Renew($domain, $vars['year']);
 
-        $this->processResponse($api);
+        $this->processResponse($api, $renewResponse);
 
-        return $renewResponse['status'] == 'OK';
+        return $renewResponse['result'] == 'OK';
     }
 
     /**
@@ -1606,15 +1606,14 @@ class Domainnameapi extends RegistrarModule
      * Process API response, setting an errors, and logging the request
      *
      * @param DomainNameAPI_PHPLibrary $api The domainnameapi API object
+     * @param array $response The array the library call returned
      */
-    private function processResponse(DomainNameAPI_PHPLibrary $api)
+    private function processResponse(DomainNameAPI_PHPLibrary $api, $response)
     {
-        $this->logRequest($api);
-
-        $response = $api->getParsedResponseData();
+        $this->logRequest($api, $response);
 
         // Set errors, if any
-        if ($response['result'] != 'OK') {
+        if (($response['result'] ?? '') != 'OK') {
             $errors = $response["error"]["Message"] . " : " . $response["error"]["Details"];
             $this->Input->setErrors(['errors' => [$errors]]);
         }
@@ -1624,12 +1623,13 @@ class Domainnameapi extends RegistrarModule
      * Logs the API request
      *
      * @param DomainNameAPI_PHPLibrary $api The domainnameapi API object
+     * @param array $response The array the library call returned
      */
-    private function logRequest(DomainNameAPI_PHPLibrary $api)
+    private function logRequest(DomainNameAPI_PHPLibrary $api, $response)
     {
         $last_request                        = $api->getRequestData();
         $last_response                       = $api->getResponseData();
-        $result_success                      = (is_array($last_response) && is_string(key($last_response)) && $last_response[key($last_response)]["OperationResult"] == "SUCCESS");
+        $result_success                      = (($response['result'] ?? '') == 'OK');
         $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_request, true), 'input', true);
         $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_response, true), 'output', $result_success);
     }
