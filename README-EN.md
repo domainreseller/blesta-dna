@@ -22,26 +22,18 @@ This module is an integration of 'domainnameapi.com' developed for Blesta. (Upda
 
 - Blesta version 5.3 or above is required.
 - PHP version 7.4 or above is required.
-- PHP Soap extension must be enabled.
 
 ## Installation
 
 * Copy the downloaded files to blesta/components/modules/domainnameapi/.
 * Activate it from the Settings > Modules menu.
 
-## 🔑 API Credentials — Username/Password or Reseller ID/API Key?
+## 🔑 API Credentials — Reseller ID & API Key
 
-Both are supported — enter them into the same two module fields; the module detects which API to use automatically:
-
-| You have | "Username" field | "Password" field | API used |
-|---|---|---|---|
-| **New panel credentials** (recommended) | Reseller ID — UUID like `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` | API Key | REST |
-| **Legacy credentials** | API username | API password | SOAP |
+Enter your **Reseller ID** and **API Key** into the module account fields.
 
 > 💡 Find your **Reseller ID** and **API Key** in your DomainNameAPI panel under **API Settings**.
-> ⚠️ These are **API credentials** — your panel login e-mail and password will **not** work here.
-
-No extra configuration is needed — if the username field contains a UUID the module uses the modern REST API, otherwise classic SOAP.
+> ⚠️ These are **API credentials** — your panel login credentials will **not** work here.
 
 
 <img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">

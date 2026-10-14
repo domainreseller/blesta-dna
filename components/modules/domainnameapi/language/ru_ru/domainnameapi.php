@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Аккаунты';
 // Управление модулем
 $lang['Domainnameapi.add_module_row']                     = 'Добавить аккаунт';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Аккаунты';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Имя пользователя API';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'Пароль API';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'ID реселлера (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API-ключ';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Опции';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Редактировать';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Удалить';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Вы уверены
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Нет аккаунтов.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Да';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'Нет';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Элементы, отмеченные звездочкой, поступают от DomainNameApi, если появляется "-", это означает, что пароль неправильный или соединение не может быть установлено.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Элементы, отмеченные звездочкой, поступают от DomainNameApi, если появляется "-", это означает, что ID реселлера / API-ключ неверны или соединение не может быть установлено.';
 
 // Метаданные строки
-$lang['Domainnameapi.row_meta.user'] = 'Имя пользователя API';
-$lang['Domainnameapi.row_meta.key']  = 'Пароль API';
+$lang['Domainnameapi.row_meta.user'] = 'ID реселлера (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'API-ключ';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Тестовый режим';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Тестовый режим / Песочница';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Для тестового режима необходимо создать пользователя и пароль из тестовой среды. Вы можете управлять определенными расширениями для тестирования ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). URL пользователя тестовой среды :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Для тестового режима необходимо создать ID реселлера (Reseller ID) и API-ключ в тестовой среде. Вы можете управлять определенными расширениями для тестирования ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). URL тестовой среды :';
 $lang['Domainnameapi.row_meta.userId'] = 'ID пользователя';
 $lang['Domainnameapi.row_meta.userName'] = 'Звание пользователя';
 $lang['Domainnameapi.row_meta.userbalances'] = 'Баланс пользователя';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'Запро�
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Обновить настройки';
 
 // Ошибки
-$lang['Domainnameapi.!error.user.valid']               = 'Пожалуйста, введите имя пользователя';
-$lang['Domainnameapi.!error.key.valid']                = 'Пожалуйста, введите пароль';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'Комбинация имени пользователя и пароля кажется недействительной';
+$lang['Domainnameapi.!error.user.valid']               = 'Пожалуйста, введите ID реселлера (Reseller ID)';
+$lang['Domainnameapi.!error.key.valid']                = 'Пожалуйста, введите API-ключ';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'Комбинация ID реселлера и API-ключа кажется недействительной';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Пожалуйста, выберите тип регистранта';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Пожалуйста, введите номер НДС';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Пожалуйста, введите номер SIREN/SIRET';

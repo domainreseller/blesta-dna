@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Accounts';
 // Modulebeheer
 $lang['Domainnameapi.add_module_row']                     = 'Account toevoegen';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Accounts';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API-gebruikersnaam';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API-wachtwoord';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Reseller ID';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API-sleutel';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Opties';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Bewerken';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Verwijderen';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Weet u zeker dat u 
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Er zijn geen accounts.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Ja';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'Nee';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Items gemarkeerd met een asterisk komen van DomainNameApi, als "-" verschijnt betekent dit dat het wachtwoord verkeerd is of er geen verbinding kan worden gemaakt.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Items gemarkeerd met een asterisk komen van DomainNameApi, als "-" verschijnt betekent dit dat de Reseller ID / API-sleutel verkeerd is of er geen verbinding kan worden gemaakt.';
 
 // Rijmeta
-$lang['Domainnameapi.row_meta.user'] = 'API-gebruikersnaam';
-$lang['Domainnameapi.row_meta.key']  = 'API-wachtwoord';
+$lang['Domainnameapi.row_meta.user'] = 'Reseller ID';
+$lang['Domainnameapi.row_meta.key']  = 'API-sleutel';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Testmodus';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Testmodus / Sandbox-modus';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Voor testmodus moet u een gebruiker en wachtwoord aanmaken vanuit de testomgeving. U kunt specifieke extensies beheren voor testen ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testomgeving gebruiker URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Voor testmodus moet u een Reseller ID en API-sleutel aanmaken vanuit de testomgeving. U kunt specifieke extensies beheren voor testen ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testomgeving URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'Gebruiker ID';
 $lang['Domainnameapi.row_meta.userName'] = 'Gebruikerstitel';
 $lang['Domainnameapi.row_meta.userbalances'] = 'Gebruikerssaldo';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP-code/ov
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Instellingen bijwerken';
 
 // Fouten
-$lang['Domainnameapi.!error.user.valid']               = 'Voer een gebruikersnaam in';
-$lang['Domainnameapi.!error.key.valid']                = 'Voer een wachtwoord in';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'De combinatie van gebruikersnaam en wachtwoord lijkt ongeldig te zijn';
+$lang['Domainnameapi.!error.user.valid']               = 'Voer een Reseller ID in';
+$lang['Domainnameapi.!error.key.valid']                = 'Voer een API-sleutel in';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'De combinatie van Reseller ID en API-sleutel lijkt ongeldig te zijn';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Selecteer een registranttype';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Voer een btw-nummer in';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Voer een SIREN/SIRET-nummer in';

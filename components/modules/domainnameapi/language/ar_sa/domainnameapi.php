@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'حسابات';
 // إدارة الوحدة
 $lang['Domainnameapi.add_module_row']                     = 'إضافة حساب';
 $lang['Domainnameapi.manage.module_rows_title']           = 'الحسابات';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'اسم المستخدم لـ API';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'كلمة مرور API';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'معرف الموزع (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'مفتاح API';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'الخيارات';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'تحرير';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'حذف';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'هل أنت متأ�
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'لا توجد حسابات.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'نعم';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'لا';
-$lang['Domainnameapi.manage.module_remote_info']          = '* العناصر المميزة بعلامة النجمة تأتي من DomainNameApi، إذا ظهر "-" فهذا يعني أن كلمة المرور خاطئة أو لا يمكن إنشاء الاتصال.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* العناصر المميزة بعلامة النجمة تأتي من DomainNameApi، إذا ظهر "-" فهذا يعني أن معرف الموزع / مفتاح API غير صحيح أو لا يمكن إنشاء الاتصال.';
 
 // بيانات الصف
-$lang['Domainnameapi.row_meta.user'] = 'اسم المستخدم لـ API';
-$lang['Domainnameapi.row_meta.key']  = 'كلمة مرور API';
+$lang['Domainnameapi.row_meta.user'] = 'معرف الموزع (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'مفتاح API';
 $lang['Domainnameapi.row_meta.sandbox'] = 'وضع الاختبار';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'وضع الاختبار / وضع الاختبار المؤقت';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'لوضع الاختبار، تحتاج إلى إنشاء مستخدم وكلمة مرور من بيئة الاختبار. يمكنك إدارة امتدادات محددة للاختبار ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). رابط مستخدم بيئة الاختبار :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'لوضع الاختبار، تحتاج إلى إنشاء معرف موزع (Reseller ID) ومفتاح API من بيئة الاختبار. يمكنك إدارة امتدادات محددة للاختبار ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). رابط بيئة الاختبار :';
 $lang['Domainnameapi.row_meta.userId'] = 'معرف المستخدم';
 $lang['Domainnameapi.row_meta.userName'] = 'عنوان المستخدم';
 $lang['Domainnameapi.row_meta.userbalances'] = 'رصيد المستخدم';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'طلب كو
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'تحديث الإعدادات';
 
 // الأخطاء
-$lang['Domainnameapi.!error.user.valid']               = 'يرجى إدخال اسم مستخدم';
-$lang['Domainnameapi.!error.key.valid']                = 'يرجى إدخال كلمة مرور';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'يبدو أن مزيج اسم المستخدم وكلمة المرور غير صالح';
+$lang['Domainnameapi.!error.user.valid']               = 'يرجى إدخال معرف الموزع (Reseller ID)';
+$lang['Domainnameapi.!error.key.valid']                = 'يرجى إدخال مفتاح API';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'يبدو أن مزيج معرف الموزع ومفتاح API غير صالح';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'يرجى اختيار نوع المسجل';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'يرجى إدخال رقم تعريف ضريبة القيمة المضافة (VAT ID)';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'يرجى إدخال رقم SIREN/SIRET';

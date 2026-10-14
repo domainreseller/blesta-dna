@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Konten';
 // Modulverwaltung
 $lang['Domainnameapi.add_module_row']                     = 'Konto hinzufügen';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Konten';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API-Benutzername';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API-Passwort';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Reseller-ID';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API-Schlüssel';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Optionen';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Bearbeiten';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Löschen';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Sind Sie sicher, da
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Es gibt keine Konten.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Ja';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'Nein';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Mit Sternchen markierte Elemente kommen von DomainNameApi, wenn "-" erscheint bedeutet es, dass das Passwort falsch ist oder keine Verbindung hergestellt werden kann.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Mit Sternchen markierte Elemente kommen von DomainNameApi, wenn "-" erscheint bedeutet es, dass Reseller-ID / API-Schlüssel falsch sind oder keine Verbindung hergestellt werden kann.';
 
 // Zeilen-Metadaten
-$lang['Domainnameapi.row_meta.user'] = 'API-Benutzername';
-$lang['Domainnameapi.row_meta.key']  = 'API-Passwort';
+$lang['Domainnameapi.row_meta.user'] = 'Reseller-ID';
+$lang['Domainnameapi.row_meta.key']  = 'API-Schlüssel';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Testmodus';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Testmodus / Sandbox-Modus';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Für den Testmodus müssen Sie einen Benutzer und ein Passwort aus der Testumgebung erstellen. Sie können bestimmte Erweiterungen zum Testen verwalten ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testumgebung Benutzer URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Für den Testmodus müssen Sie eine Reseller-ID und einen API-Schlüssel aus der Testumgebung erstellen. Sie können bestimmte Erweiterungen zum Testen verwalten ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Testumgebung URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'Benutzer-ID';
 $lang['Domainnameapi.row_meta.userName'] = 'Benutzertitel';
 $lang['Domainnameapi.row_meta.userbalances'] = 'Benutzerguthaben';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP-Code/Ü
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Einstellungen aktualisieren';
 
 // Fehler
-$lang['Domainnameapi.!error.user.valid']               = 'Bitte geben Sie einen Benutzernamen ein';
-$lang['Domainnameapi.!error.key.valid']                = 'Bitte geben Sie ein Passwort ein';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'Die Kombination aus Benutzername und Passwort scheint ungültig zu sein';
+$lang['Domainnameapi.!error.user.valid']               = 'Bitte geben Sie eine Reseller-ID ein';
+$lang['Domainnameapi.!error.key.valid']                = 'Bitte geben Sie einen API-Schlüssel ein';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'Die Kombination aus Reseller-ID und API-Schlüssel scheint ungültig zu sein';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Bitte wählen Sie einen Registrantentyp';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Bitte geben Sie eine USt-IdNr. ein';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Bitte geben Sie eine SIREN/SIRET-Nummer ein';

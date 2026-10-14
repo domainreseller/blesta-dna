@@ -7,7 +7,6 @@
     "blesta/composer-installer": "~1.0",
     "ext-dom": "*",
     "ext-simplexml": "*",
-    "ext-curl": "*",
-    "ext-soap": "*"
+    "ext-curl": "*"
   }
 }

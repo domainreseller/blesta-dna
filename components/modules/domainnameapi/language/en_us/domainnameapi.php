@@ -10,8 +10,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Accounts';
 // Module management
 $lang['Domainnameapi.add_module_row']                     = 'Add Account';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Accounts';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Api Username';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Password';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Reseller ID';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Key';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Options';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Edit';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Delete';
@@ -19,14 +19,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Are you sure you wa
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'There are no accounts.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Yes';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'No';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Items marked with asterisk come from DomainNameApi, if "-" appears it means the password is wrong or connection cannot be established.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Items marked with asterisk come from DomainNameApi, if "-" appears it means the Reseller ID / API Key is wrong or connection cannot be established.';
 
 // Row Meta
-$lang['Domainnameapi.row_meta.user'] = 'Api Username';
-$lang['Domainnameapi.row_meta.key']  = 'Api Password';
+$lang['Domainnameapi.row_meta.user'] = 'Reseller ID';
+$lang['Domainnameapi.row_meta.key']  = 'API Key';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Test mode';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Test mode / Sandbox mode';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'For test mode, you need to create a user and password from the test environment. You can manage specific extensions for testing ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test environment user URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'For test mode, you need to create a Reseller ID and API Key from the test environment. You can manage specific extensions for testing ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test environment URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'User ID';
 $lang['Domainnameapi.row_meta.userName'] = 'User Title';
 $lang['Domainnameapi.row_meta.userbalances'] = 'User Balance';
@@ -76,9 +76,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'Request EPP
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Update Settings';
 
 // Errors
-$lang['Domainnameapi.!error.user.valid']               = 'Please enter a user';
-$lang['Domainnameapi.!error.key.valid']                = 'Please enter a key';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'The user and password combination appear to be invalid';
+$lang['Domainnameapi.!error.user.valid']               = 'Please enter a Reseller ID';
+$lang['Domainnameapi.!error.key.valid']                = 'Please enter an API Key';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'The Reseller ID and API Key combination appears to be invalid';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Please select a registrant type';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Please enter a VAT ID';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Please enter a SIREN/SIRET Number';

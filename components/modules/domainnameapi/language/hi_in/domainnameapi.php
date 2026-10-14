@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'खाते';
 // मॉड्यूल प्रबंधन
 $lang['Domainnameapi.add_module_row']                     = 'खाता जोड़ें';
 $lang['Domainnameapi.manage.module_rows_title']           = 'खाते';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API उपयोगकर्ता नाम';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API पासवर्ड';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'रीसेलर ID (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API कुंजी';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'विकल्प';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'संपादित करें';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'हटाएं';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'क्या आप
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'कोई खाते नहीं हैं।';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'हाँ';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'नहीं';
-$lang['Domainnameapi.manage.module_remote_info']          = '* तारांकित आइटम DomainNameApi से आते हैं, यदि "-" दिखाई देता है तो इसका मतलब है कि पासवर्ड गलत है या कनेक्शन स्थापित नहीं किया जा सकता।';
+$lang['Domainnameapi.manage.module_remote_info']          = '* तारांकित आइटम DomainNameApi से आते हैं, यदि "-" दिखाई देता है तो इसका मतलब है कि रीसेलर ID / API कुंजी गलत है या कनेक्शन स्थापित नहीं किया जा सकता।';
 
 // पंक्ति मेटा डेटा
-$lang['Domainnameapi.row_meta.user'] = 'API उपयोगकर्ता नाम';
-$lang['Domainnameapi.row_meta.key']  = 'API पासवर्ड';
+$lang['Domainnameapi.row_meta.user'] = 'रीसेलर ID (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'API कुंजी';
 $lang['Domainnameapi.row_meta.sandbox'] = 'परीक्षण मोड';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'परीक्षण मोड / सैंडबॉक्स मोड';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'परीक्षण मोड के लिए, आपको परीक्षण वातावरण से उपयोगकर्ता और पासवर्ड बनाने की आवश्यकता है। आप परीक्षण के लिए विशिष्ट एक्सटेंशन प्रबंधित कर सकते हैं ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop )। परीक्षण वातावरण उपयोगकर्ता URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'परीक्षण मोड के लिए, आपको परीक्षण वातावरण से रीसेलर ID (Reseller ID) और API कुंजी बनाने की आवश्यकता है। आप परीक्षण के लिए विशिष्ट एक्सटेंशन प्रबंधित कर सकते हैं ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop )। परीक्षण वातावरण URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'उपयोगकर्ता ID';
 $lang['Domainnameapi.row_meta.userName'] = 'उपयोगकर्ता शीर्षक';
 $lang['Domainnameapi.row_meta.userbalances'] = 'उपयोगकर्ता शेष राशि';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP को�
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'सेटिंग्स अपडेट करें';
 
 // त्रुटियां
-$lang['Domainnameapi.!error.user.valid']               = 'कृपया एक उपयोगकर्ता नाम दर्ज करें';
-$lang['Domainnameapi.!error.key.valid']                = 'कृपया एक पासवर्ड दर्ज करें';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'उपयोगकर्ता नाम और पासवर्ड संयोजन अमान्य प्रतीत होता है';
+$lang['Domainnameapi.!error.user.valid']               = 'कृपया एक रीसेलर ID (Reseller ID) दर्ज करें';
+$lang['Domainnameapi.!error.key.valid']                = 'कृपया एक API कुंजी दर्ज करें';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'रीसेलर ID और API कुंजी संयोजन अमान्य प्रतीत होता है';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'कृपया एक पंजीकरणकर्ता प्रकार चुनें';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'कृपया एक VAT संख्या दर्ज करें';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'कृपया एक SIREN/SIRET संख्या दर्ज करें';

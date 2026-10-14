@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Hesaplar';
 // Modül Yönetimi
 $lang['Domainnameapi.add_module_row']                     = 'Hesap Ekle';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Hesaplar';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API Kullanıcı Adı';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Şifresi';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Bayi ID (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Anahtarı';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Seçenekler';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Düzenle';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Sil';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Bu hesabı silmek i
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Hiç hesap yok.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Evet';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'Hayır';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Olanlar DomainNameApi tarafından gelir, "-" gelirse şifre yanlış ya da bağlantı kurulamıyor anlamına gelir.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Olanlar DomainNameApi tarafından gelir, "-" gelirse Bayi ID / API Anahtarı yanlış ya da bağlantı kurulamıyor anlamına gelir.';
 
 // Satır Meta Verileri
-$lang['Domainnameapi.row_meta.user'] = 'API Kullanıcı Adı';
-$lang['Domainnameapi.row_meta.key']  = 'API Şifresi';
+$lang['Domainnameapi.row_meta.user'] = 'Bayi ID (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'API Anahtarı';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Test modu';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Test modu / Sandbox modu';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Test modu için test ortamından kullanıcı ve şifre açmanız gereklidir. Test için belirli uzantıları yönetebilirsiniz ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test ortamı için kullanıcı URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Test modu için test ortamından Bayi ID (Reseller ID) ve API Anahtarı almanız gereklidir. Test için belirli uzantıları yönetebilirsiniz ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test ortamı URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'User ID';
 $lang['Domainnameapi.row_meta.userName'] = 'User Ünvan';
 $lang['Domainnameapi.row_meta.userbalances'] = 'User Bakiyesi';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP Kodu/Tr
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Ayarları Güncelle';
 
 // Hatalar
-$lang['Domainnameapi.!error.user.valid']               = 'Lütfen bir kullanıcı adı girin';
-$lang['Domainnameapi.!error.key.valid']                = 'Lütfen bir şifre girin';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'Kullanıcı adı ve şifre kombinasyonu geçersiz görünüyor';
+$lang['Domainnameapi.!error.user.valid']               = 'Lütfen bir Bayi ID (Reseller ID) girin';
+$lang['Domainnameapi.!error.key.valid']                = 'Lütfen bir API Anahtarı girin';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'Bayi ID ve API Anahtarı kombinasyonu geçersiz görünüyor';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Lütfen bir kaydedici türü seçin';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Lütfen bir KDV Kimlik Numarası girin';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Lütfen bir SIREN/SIRET Numarası girin';

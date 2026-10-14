@@ -22,26 +22,18 @@ Bu modül, Blesta için geliştirilmiş bir 'domainnameapi.com' entegrasyonudur.
 
 - Blesta'nin 5.3 ve üzeri sürümü gerekmektedir.
 - PHP'nin 7.4 ve üzeri sürümü gerekmektedir.
-- PHP Soap eklentisi etkinleştirilmelidir.
 
 ## Kurulum
 
 * İndirdiğiniz dosyaları blesta/components/modules/domainnameapi/
 * Ayarlar>Modüller menüsünden aktifleştirin.
 
-## 🔑 API Bilgileri — Kullanıcı Adı/Şifre mi, Reseller ID/API Key mi?
+## 🔑 API Bilgileri — Bayi ID (Reseller ID) ve API Anahtarı
 
-Her ikisi de desteklenir — bilgileri modüldeki aynı iki alana girin; modül hangi API'nin kullanılacağını otomatik olarak algılar:
-
-| Elinizdeki bilgi | "Kullanıcı adı" alanı | "Şifre" alanı | Kullanılan API |
-|---|---|---|---|
-| **Yeni panel bilgileri** (önerilen) | Reseller ID — `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` biçiminde UUID | API Key | REST |
-| **Eski (legacy) bilgiler** | API kullanıcı adı | API şifresi | SOAP |
+Modül hesap alanlarına **Bayi ID (Reseller ID)** ve **API Anahtarı (API Key)** bilgilerinizi girin.
 
 > 💡 **Reseller ID** ve **API Key** bilgilerinizi DomainNameAPI panelinizde **API Ayarları** bölümünde bulabilirsiniz.
-> ⚠️ Bunlar **API bilgileridir** — panele giriş yaptığınız e-posta/şifre burada **ÇALIŞMAZ**. API Ayarları bölümündeki Reseller ID (UUID) ve API Key kullanılmalıdır.
-
-Ek bir yapılandırma gerekmez — kullanıcı adı alanına UUID girilirse modül modern REST API'yi, aksi halde klasik SOAP'ı kullanır.
+> ⚠️ Bunlar **API bilgileridir** — panele giriş bilgileriniz burada **ÇALIŞMAZ**. API Ayarları bölümündeki Reseller ID ve API Key kullanılmalıdır.
 
 <img src="https://github.com/user-attachments/assets/4d72c16e-8f6f-4a07-acc0-ebe7bf5684c4">
 <img src="https://github.com/user-attachments/assets/d0ebc402-af3d-4768-8adb-1705cf7c0a67">

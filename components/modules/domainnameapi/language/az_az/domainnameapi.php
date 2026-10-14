@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Hesablar';
 // Modul idarəsi
 $lang['Domainnameapi.add_module_row']                     = 'Hesab əlavə et';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Hesablar';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API İstifadəçi adı';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Şifrə';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Reseller ID';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API Açarı';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Seçimlər';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Redaktə et';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Sil';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'Bu hesabı silmək 
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'Heç bir hesab yoxdur.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Bəli';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'Xeyr';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Ulduz işarəsi ilə işarələnmiş elementlər DomainNameApi-dən gəlir, əgər "-" görünsə bu şifrənin yanlış olduğunu və ya əlaqə qurula bilmədiyini bildirir.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Ulduz işarəsi ilə işarələnmiş elementlər DomainNameApi-dən gəlir, əgər "-" görünsə bu Reseller ID / API Açarının yanlış olduğunu və ya əlaqə qurula bilmədiyini bildirir.';
 
 // Sətir Meta
-$lang['Domainnameapi.row_meta.user'] = 'API İstifadəçi adı';
-$lang['Domainnameapi.row_meta.key']  = 'API Şifrə';
+$lang['Domainnameapi.row_meta.user'] = 'Reseller ID';
+$lang['Domainnameapi.row_meta.key']  = 'API Açarı';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Test rejimi';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Test rejimi / Sandbox rejimi';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Test rejimi üçün test mühitindən istifadəçi və şifrə açmalısınız. Test üçün müəyyən uzantıları idarə edə bilərsiniz ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test mühiti istifadəçi URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Test rejimi üçün test mühitindən Reseller ID və API Açarı yaratmalısınız. Test üçün müəyyən uzantıları idarə edə bilərsiniz ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). Test mühiti URL :';
 $lang['Domainnameapi.row_meta.userId'] = 'İstifadəçi ID';
 $lang['Domainnameapi.row_meta.userName'] = 'İstifadəçi Başlıq';
 $lang['Domainnameapi.row_meta.userbalances'] = 'İstifadəçi Balansı';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP Kodu/Tr
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Ayarları Yenilə';
 
 // Səhvlər
-$lang['Domainnameapi.!error.user.valid']               = 'Zəhmət olmasa, istifadəçi adı daxil edin';
-$lang['Domainnameapi.!error.key.valid']                = 'Zəhmət olmasa, şifrə daxil edin';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'İstifadəçi adı və şifrə kombinasyonu etibarsız görünür';
+$lang['Domainnameapi.!error.user.valid']               = 'Zəhmət olmasa, Reseller ID daxil edin';
+$lang['Domainnameapi.!error.key.valid']                = 'Zəhmət olmasa, API Açarı daxil edin';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'Reseller ID və API Açarı kombinasyonu etibarsız görünür';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Zəhmət olmasa, qeydiyyatçı növünü seçin';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Zəhmət olmasa, ƏDV İdentifikasiya Nömrəsini daxil edin';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Zəhmət olmasa, SIREN/SIRET Nömrəsini daxil edin';

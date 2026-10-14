@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = '帐户';
 // 模块管理
 $lang['Domainnameapi.add_module_row']                     = '添加帐户';
 $lang['Domainnameapi.manage.module_rows_title']           = '帐户';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API用户名';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API密码';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = '经销商 ID (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API 密钥';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = '选项';
 $lang['Domainnameapi.manage.module_rows.edit']            = '编辑';
 $lang['Domainnameapi.manage.module_rows.delete']          = '删除';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = '您确定要删除�
 $lang['Domainnameapi.manage.module_rows_no_results']      = '没有帐户。';
 $lang['Domainnameapi.manage.sandbox_yes']                 = '是';
 $lang['Domainnameapi.manage.sandbox_no']                  = '否';
-$lang['Domainnameapi.manage.module_remote_info']          = '* 标记星号的项目来自DomainNameApi，如果显示"-"表示密码错误或无法建立连接。';
+$lang['Domainnameapi.manage.module_remote_info']          = '* 标记星号的项目来自DomainNameApi，如果显示"-"表示经销商 ID / API 密钥错误或无法建立连接。';
 
 // 行元数据
-$lang['Domainnameapi.row_meta.user'] = 'API用户名';
-$lang['Domainnameapi.row_meta.key']  = 'API密码';
+$lang['Domainnameapi.row_meta.user'] = '经销商 ID (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'API 密钥';
 $lang['Domainnameapi.row_meta.sandbox'] = '测试模式';
 $lang['Domainnameapi.row_meta.sandboxheader'] = '测试模式 / 沙盒模式';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = '对于测试模式，您需要从测试环境创建用户和密码。您可以管理特定的测试扩展名 ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop )。测试环境用户URL：';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = '对于测试模式，您需要从测试环境创建经销商 ID (Reseller ID) 和 API 密钥。您可以管理特定的测试扩展名 ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop )。测试环境URL：';
 $lang['Domainnameapi.row_meta.userId'] = '用户ID';
 $lang['Domainnameapi.row_meta.userName'] = '用户称号';
 $lang['Domainnameapi.row_meta.userbalances'] = '用户余额';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = '请求EPP�
 $lang['Domainnameapi.tab_settings.field_submit']                  = '更新设置';
 
 // 错误
-$lang['Domainnameapi.!error.user.valid']               = '请输入用户名';
-$lang['Domainnameapi.!error.key.valid']                = '请输入密码';
-$lang['Domainnameapi.!error.key.valid_connection']     = '用户名和密码组合似乎无效';
+$lang['Domainnameapi.!error.user.valid']               = '请输入经销商 ID (Reseller ID)';
+$lang['Domainnameapi.!error.key.valid']                = '请输入 API 密钥';
+$lang['Domainnameapi.!error.key.valid_connection']     = '经销商 ID 和 API 密钥组合似乎无效';
 $lang['Domainnameapi.!error.registrant_type.format']   = '请选择注册人类型';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = '请输入增值税号';
 $lang['Domainnameapi.!error.siren_siret.format']       = '请输入SIREN/SIRET号码';

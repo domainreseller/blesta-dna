@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = '계정';
 // 모듈 관리
 $lang['Domainnameapi.add_module_row']                     = '계정 추가';
 $lang['Domainnameapi.manage.module_rows_title']           = '계정';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'API 사용자명';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API 비밀번호';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = '리셀러 ID (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'API 키';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = '옵션';
 $lang['Domainnameapi.manage.module_rows.edit']            = '편집';
 $lang['Domainnameapi.manage.module_rows.delete']          = '삭제';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = '이 계정을 삭�
 $lang['Domainnameapi.manage.module_rows_no_results']      = '계정이 없습니다.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = '예';
 $lang['Domainnameapi.manage.sandbox_no']                  = '아니오';
-$lang['Domainnameapi.manage.module_remote_info']          = '* 별표로 표시된 항목은 DomainNameApi에서 제공되며, "-"가 나타나면 비밀번호가 잘못되었거나 연결을 설정할 수 없음을 의미합니다.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* 별표로 표시된 항목은 DomainNameApi에서 제공되며, "-"가 나타나면 리셀러 ID / API 키가 잘못되었거나 연결을 설정할 수 없음을 의미합니다.';
 
 // 행 메타데이터
-$lang['Domainnameapi.row_meta.user'] = 'API 사용자명';
-$lang['Domainnameapi.row_meta.key']  = 'API 비밀번호';
+$lang['Domainnameapi.row_meta.user'] = '리셀러 ID (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'API 키';
 $lang['Domainnameapi.row_meta.sandbox'] = '테스트 모드';
 $lang['Domainnameapi.row_meta.sandboxheader'] = '테스트 모드 / 샌드박스 모드';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = '테스트 모드의 경우 테스트 환경에서 사용자와 비밀번호를 생성해야 합니다. 테스트용 특정 확장자를 관리할 수 있습니다 ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). 테스트 환경 사용자 URL :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = '테스트 모드의 경우 테스트 환경에서 리셀러 ID (Reseller ID)와 API 키를 생성해야 합니다. 테스트용 특정 확장자를 관리할 수 있습니다 ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). 테스트 환경 URL :';
 $lang['Domainnameapi.row_meta.userId'] = '사용자 ID';
 $lang['Domainnameapi.row_meta.userName'] = '사용자 제목';
 $lang['Domainnameapi.row_meta.userbalances'] = '사용자 잔액';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPP 코드/
 $lang['Domainnameapi.tab_settings.field_submit']                  = '설정 업데이트';
 
 // 오류
-$lang['Domainnameapi.!error.user.valid']               = '사용자명을 입력하세요';
-$lang['Domainnameapi.!error.key.valid']                = '비밀번호를 입력하세요';
-$lang['Domainnameapi.!error.key.valid_connection']     = '사용자명과 비밀번호 조합이 유효하지 않은 것 같습니다';
+$lang['Domainnameapi.!error.user.valid']               = '리셀러 ID (Reseller ID)를 입력하세요';
+$lang['Domainnameapi.!error.key.valid']                = 'API 키를 입력하세요';
+$lang['Domainnameapi.!error.key.valid_connection']     = '리셀러 ID와 API 키 조합이 유효하지 않은 것 같습니다';
 $lang['Domainnameapi.!error.registrant_type.format']   = '등록자 유형을 선택하세요';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'VAT 번호를 입력하세요';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'SIREN/SIRET 번호를 입력하세요';

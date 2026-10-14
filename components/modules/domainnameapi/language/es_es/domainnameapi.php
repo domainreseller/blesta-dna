@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'Cuentas';
 // Gestión del módulo
 $lang['Domainnameapi.add_module_row']                     = 'Agregar cuenta';
 $lang['Domainnameapi.manage.module_rows_title']           = 'Cuentas';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'Nombre de usuario API';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'Contraseña API';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'ID de revendedor (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'Clave API';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'Opciones';
 $lang['Domainnameapi.manage.module_rows.edit']            = 'Editar';
 $lang['Domainnameapi.manage.module_rows.delete']          = 'Eliminar';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = '¿Está seguro de q
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'No hay cuentas.';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'Sí';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'No';
-$lang['Domainnameapi.manage.module_remote_info']          = '* Los elementos marcados con asterisco provienen de DomainNameApi, si aparece "-" significa que la contraseña es incorrecta o no se puede establecer la conexión.';
+$lang['Domainnameapi.manage.module_remote_info']          = '* Los elementos marcados con asterisco provienen de DomainNameApi, si aparece "-" significa que el ID de revendedor / la clave API es incorrecto o no se puede establecer la conexión.';
 
 // Metadatos de fila
-$lang['Domainnameapi.row_meta.user'] = 'Nombre de usuario API';
-$lang['Domainnameapi.row_meta.key']  = 'Contraseña API';
+$lang['Domainnameapi.row_meta.user'] = 'ID de revendedor (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'Clave API';
 $lang['Domainnameapi.row_meta.sandbox'] = 'Modo de prueba';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'Modo de prueba / Modo sandbox';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Para el modo de prueba, necesita crear un usuario y contraseña desde el entorno de prueba. Puede gestionar extensiones específicas para pruebas ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). URL del usuario del entorno de prueba :';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'Para el modo de prueba, necesita crear un ID de revendedor (Reseller ID) y una clave API desde el entorno de prueba. Puede gestionar extensiones específicas para pruebas ( com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ). URL del entorno de prueba :';
 $lang['Domainnameapi.row_meta.userId'] = 'ID de usuario';
 $lang['Domainnameapi.row_meta.userName'] = 'Título de usuario';
 $lang['Domainnameapi.row_meta.userbalances'] = 'Saldo de usuario';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'Solicitar c
 $lang['Domainnameapi.tab_settings.field_submit']                  = 'Actualizar configuración';
 
 // Errores
-$lang['Domainnameapi.!error.user.valid']               = 'Por favor, ingrese un nombre de usuario';
-$lang['Domainnameapi.!error.key.valid']                = 'Por favor, ingrese una contraseña';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'La combinación de nombre de usuario y contraseña parece ser inválida';
+$lang['Domainnameapi.!error.user.valid']               = 'Por favor, ingrese un ID de revendedor (Reseller ID)';
+$lang['Domainnameapi.!error.key.valid']                = 'Por favor, ingrese una clave API';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'La combinación de ID de revendedor y clave API parece ser inválida';
 $lang['Domainnameapi.!error.registrant_type.format']   = 'Por favor, seleccione un tipo de registrante';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'Por favor, ingrese un número de IVA';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'Por favor, ingrese un número SIREN/SIRET';

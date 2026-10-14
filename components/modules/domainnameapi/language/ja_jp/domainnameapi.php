@@ -9,8 +9,8 @@ $lang['Domainnameapi.module_row_plural'] = 'アカウント';
 // モジュール管理
 $lang['Domainnameapi.add_module_row']                     = 'アカウントを追加';
 $lang['Domainnameapi.manage.module_rows_title']           = 'アカウント';
-$lang['Domainnameapi.manage.module_rows_heading.user']    = 'APIユーザー名';
-$lang['Domainnameapi.manage.module_rows_heading.key']     = 'APIパスワード';
+$lang['Domainnameapi.manage.module_rows_heading.user']    = 'リセラーID (Reseller ID)';
+$lang['Domainnameapi.manage.module_rows_heading.key']     = 'APIキー';
 $lang['Domainnameapi.manage.module_rows_heading.options'] = 'オプション';
 $lang['Domainnameapi.manage.module_rows.edit']            = '編集';
 $lang['Domainnameapi.manage.module_rows.delete']          = '削除';
@@ -18,14 +18,14 @@ $lang['Domainnameapi.manage.module_rows.confirm_delete']  = 'このアカウン�
 $lang['Domainnameapi.manage.module_rows_no_results']      = 'アカウントがありません。';
 $lang['Domainnameapi.manage.sandbox_yes']                 = 'はい';
 $lang['Domainnameapi.manage.sandbox_no']                  = 'いいえ';
-$lang['Domainnameapi.manage.module_remote_info']          = '* アスタリスクでマークされた項目はDomainNameApiから来ており、"-"が表示される場合はパスワードが間違っているか、接続を確立できないことを意味します。';
+$lang['Domainnameapi.manage.module_remote_info']          = '* アスタリスクでマークされた項目はDomainNameApiから来ており、"-"が表示される場合はリセラーID / APIキーが間違っているか、接続を確立できないことを意味します。';
 
 // 行メタデータ
-$lang['Domainnameapi.row_meta.user'] = 'APIユーザー名';
-$lang['Domainnameapi.row_meta.key']  = 'APIパスワード';
+$lang['Domainnameapi.row_meta.user'] = 'リセラーID (Reseller ID)';
+$lang['Domainnameapi.row_meta.key']  = 'APIキー';
 $lang['Domainnameapi.row_meta.sandbox'] = 'テストモード';
 $lang['Domainnameapi.row_meta.sandboxheader'] = 'テストモード / サンドボックスモード';
-$lang['Domainnameapi.row_meta.sandboxwarning'] = 'テストモードでは、テスト環境からユーザーとパスワードを作成する必要があります。テスト用の特定の拡張子を管理できます（ com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ）。テスト環境ユーザーURL：';
+$lang['Domainnameapi.row_meta.sandboxwarning'] = 'テストモードでは、テスト環境からリセラーID (Reseller ID) とAPIキーを作成する必要があります。テスト用の特定の拡張子を管理できます（ com , net ,cc , xyz , info ,aero , org , tr , tc , blog, shop ）。テスト環境URL：';
 $lang['Domainnameapi.row_meta.userId'] = 'ユーザーID';
 $lang['Domainnameapi.row_meta.userName'] = 'ユーザータイトル';
 $lang['Domainnameapi.row_meta.userbalances'] = 'ユーザー残高';
@@ -75,9 +75,9 @@ $lang['Domainnameapi.tab_settings.field_request_epp']             = 'EPPコー�
 $lang['Domainnameapi.tab_settings.field_submit']                  = '設定を更新';
 
 // エラー
-$lang['Domainnameapi.!error.user.valid']               = 'ユーザー名を入力してください';
-$lang['Domainnameapi.!error.key.valid']                = 'パスワードを入力してください';
-$lang['Domainnameapi.!error.key.valid_connection']     = 'ユーザー名とパスワードの組み合わせが無効のようです';
+$lang['Domainnameapi.!error.user.valid']               = 'リセラーID (Reseller ID) を入力してください';
+$lang['Domainnameapi.!error.key.valid']                = 'APIキーを入力してください';
+$lang['Domainnameapi.!error.key.valid_connection']     = 'リセラーIDとAPIキーの組み合わせが無効のようです';
 $lang['Domainnameapi.!error.registrant_type.format']   = '登録者タイプを選択してください';
 $lang['Domainnameapi.!error.registrant_vat_id.format'] = 'VAT番号を入力してください';
 $lang['Domainnameapi.!error.siren_siret.format']       = 'SIREN/SIRET番号を入力してください';

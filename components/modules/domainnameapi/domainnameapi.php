@@ -1493,7 +1493,7 @@ class Domainnameapi extends RegistrarModule
      * Validates that the given connection details are correct by attempting to check the availability of a domain
      *
      * @param string $key The API key
-     * @param string $user The API user
+     * @param string $user The Reseller ID
      * @param string $sandbox "true" if this is a sandbox account, false otherwise
      * @return bool True if the connection details are valid, false otherwise
      */
@@ -1516,7 +1516,6 @@ class Domainnameapi extends RegistrarModule
      * @param int|null $module_row_id The ID of the module row to fetch for the current module
      * @return array A list of all TLDs and their pricing
      *    [tld => [currency => [year# => ['register' => price, 'transfer' => price, 'renew' => price]]]]
-     * @throws SoapFault
      */
     public function getTldPricing($module_row_id=null)
     {
@@ -1589,19 +1588,18 @@ class Domainnameapi extends RegistrarModule
     /**
      * Initializes the DomainNameApi and returns an instance of that object
      *
-     * @param string $username The user to connect as
-     * @param string $key The key to use when connecting
+     * @param string $resellerId The Reseller ID to connect as
+     * @param string $key The API key to use when connecting
      * @return DomainNameAPI_PHPLibrary The DomainNameApiInstance instance
-     * @throws SoapFault
      */
-    private function getApi($username, $key,$sandbox = false)
+    private function getApi($resellerId, $key,$sandbox = false)
     {
 
         if (!class_exists("\DomainNameApi\DomainNameAPI_PHPLibrary")) {
              Loader::load(dirname(__FILE__) . '/' . 'apis' . '/' . 'api.php');
         }
 
-        return new DomainNameAPI_PHPLibrary($username, $key,$sandbox);
+        return new DomainNameAPI_PHPLibrary($resellerId, $key,$sandbox);
     }
 
     /**
@@ -1632,7 +1630,6 @@ class Domainnameapi extends RegistrarModule
         $last_request                        = $api->getRequestData();
         $last_response                       = $api->getResponseData();
         $result_success                      = (is_array($last_response) && is_string(key($last_response)) && $last_response[key($last_response)]["OperationResult"] == "SUCCESS");
-        $last_request['request']['Password'] = '******';
         $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_request, true), 'input', true);
         $this->log($api->getServiceUrl() . '|' . $api->getLastFunction(), print_r($last_response, true), 'output', $result_success);
     }
