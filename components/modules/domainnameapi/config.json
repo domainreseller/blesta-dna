@@ -1,5 +1,5 @@
 {
-    "version": "4.0.0",
+    "version": "4.0.2",
     "type": "registrar",
     "name": "Domainnameapi",
     "description": "DomainNameApi is a domain registration module that allows you to register and manage domain names. More Than 800 extension!",
