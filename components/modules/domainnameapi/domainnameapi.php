@@ -1499,7 +1499,7 @@ class Domainnameapi extends RegistrarModule
      */
     public function validateConnection($key, $user, $sandbox)
     {
-        $api = $this->getApi($user, $key,$sandbox);
+        $api = $this->getApi($user, $key, $sandbox === 'true' || $sandbox === true);
 
         $resellerdetails = $api->GetResellerDetails();
 
