@@ -1599,7 +1599,10 @@ class Domainnameapi extends RegistrarModule
              Loader::load(dirname(__FILE__) . '/' . 'apis' . '/' . 'api.php');
         }
 
-        return new DomainNameAPI_PHPLibrary($resellerId, $key,$sandbox);
+        $api = new DomainNameAPI_PHPLibrary($resellerId, $key,$sandbox);
+        if (method_exists($api, 'setClientInfo')) { $api->setClientInfo('blesta', method_exists($this, 'getVersion') ? (string) $this->getVersion() : ''); }
+
+        return $api;
     }
 
     /**
